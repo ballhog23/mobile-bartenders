@@ -1,0 +1,23 @@
+@import '../general.scss';
+
+.hero {
+    &::before {
+        all: unset;
+    }
+
+    .default-container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 4rem;
+
+        h1{
+            @include gradientText($red);
+        }
+
+        a {
+            font-style: italic;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+    }
+}

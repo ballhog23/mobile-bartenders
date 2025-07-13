@@ -1,0 +1,18 @@
+@import '../general.scss';
+
+header {
+    padding-top: 4.375rem;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media only screen and (min-width: $md-breakpoint) {
+        padding-top: 6.25rem;
+    }
+
+    h1 {
+        color: $black;
+        @include gradientText($red);
+    }
+}

@@ -1,0 +1,90 @@
+.site-footer {
+    padding-block: 2rem;
+    background-color: $black;
+
+    .footer-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 2rem;
+
+        @media (width > 26.875rem) {
+            flex-direction: row;
+        }
+
+        .left {
+            flex-direction: column;
+            align-items: flex-start;
+
+            .brand {
+                padding-bottom: 1rem;
+                border-bottom: 0.063rem solid $gray;
+                color: $white;
+
+                &:hover {
+                    color: $red;
+                }
+            }
+
+            .footer-nav {
+                width: 100%;
+                padding-top: 1rem;
+
+                ul {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1.25rem;
+                    list-style-type: none;
+
+                    li {
+
+                        a {
+                            font-size: .75rem;
+                            letter-spacing: .125rem;
+                            text-transform: uppercase;
+                            color: $white;
+
+                            &:hover {
+                                color: $red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .right {
+            justify-content: flex-start;
+
+            @media (width > 26.875rem) {
+                justify-content: flex-end;
+            }
+
+            .social-links {
+                gap: 0.625rem;
+                list-style-type: none;
+
+                @media (width > 26.875rem) {
+                    gap: 1rem;
+                }
+
+                a {
+                    svg {
+                        path {
+                            fill: $red;
+                            transition: fill $transition;
+                        }
+                    }
+
+                    &:hover {
+                        svg {
+                            path {
+                                fill: $white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
