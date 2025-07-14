@@ -21,7 +21,6 @@ function handleValidation(event) {
     let errorMessages = [];
     let errorObject = {};
 
-    // remove any existing error classes on input fields
     removeErrorClasses(defaultErrorMessages);
 
     if (!handleEmailValidity(clientEmail.value.trim())) {
@@ -45,9 +44,7 @@ function handleValidation(event) {
     }
 
     if (errorMessages.length > 0) {
-        // add new error classes
         addErrorClasses(errorObject)
-        // check for exisitng error messages, and update the html accordingly
         updateErrorMessages(formErrorsElement);
         formErrorsElement.insertAdjacentHTML('afterbegin', generateErrorHtml(errorMessages));
         formErrorsElement.style.display = 'block';
