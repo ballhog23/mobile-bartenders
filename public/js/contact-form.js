@@ -1,15 +1,16 @@
-// handles front end form validation on top of html validation
+// handles contact form validation on top of html validation
+// gets form data ready to send to backend
 const contactForm = document.getElementById('contact-form');
-
 
 contactForm.addEventListener('submit', handleValidation);
 
+// this will probably be async function
 function handleValidation(event) {
     event.preventDefault();
     const clientName = document.getElementById('name');
     const clientEmail = document.getElementById('email');
     const clientPhone = document.getElementById('phone');
-    const clientMessage = document.getElementById('inquiry');
+    const clientInquiry = document.getElementById('inquiry');
     const formErrorsElement = document.querySelector('.form-errors');
     const defaultErrorMessages = {
         name: "you forgot to enter your name",
@@ -17,21 +18,30 @@ function handleValidation(event) {
         phone: "telephone number should be 10 digits, only using numbers 0-9",
         inquiry: "you forgot to enter a message",
     };
-
     let errorMessages = [];
     let errorObject = {};
 
     // remove any existing error classes on input fields
     removeErrorClasses(defaultErrorMessages);
 
-    if (!handleEmailValidity(clientEmail.value)) {
+    if (!handleEmailValidity(clientEmail.value.trim())) {
         errorMessages.push(defaultErrorMessages.email);
         errorObject.email = defaultErrorMessages.email;
     }
 
-    if (!handleTelValidity(clientPhone.value)) {
+    if (!handleTelValidity(clientPhone.value.trim())) {
         errorMessages.push(defaultErrorMessages.phone);
         errorObject.phone = defaultErrorMessages.phone;
+    }
+
+    if (!handleTextInputValidity(clientName.value.trim(), 2, 50)) {
+        errorMessages.push(defaultErrorMessages.name);
+        errorObject.name = defaultErrorMessages.name
+    }
+
+    if (!handleTextInputValidity(clientInquiry.value.trim(), 10, 500)) {
+        errorMessages.push(defaultErrorMessages.inquiry);
+        errorObject.inquiry = defaultErrorMessages.inquiry;
     }
 
     if (errorMessages.length > 0) {
@@ -44,22 +54,23 @@ function handleValidation(event) {
     } else {
         updateErrorMessages(formErrorsElement);
         formErrorsElement.style.display = 'none';
-        console.log('send to backend')
+        createEmailObject(clientName.value, clientEmail.value, clientPhone.value, clientInquiry.value);
     }
 }
 
 function handleEmailValidity(email) {
-    const emailRegex = /^\w+\@\w+\.\w+$/igm;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/gmi;
     return emailRegex.test(email)
 }
 
 function handleTelValidity(tel) {
-    const telRegex = /[0-9]{10}/;
+    const telRegex = /[0-9]{10}/g;
     return telRegex.test(tel);
 }
 
 function handleTextInputValidity(elementValue, minLength, maxLength) {
-    console.log(elementValue, minLength, maxLength);
+    const elementLength = elementValue.length
+    return elementLength >= minLength && elementLength <= maxLength;
 }
 
 function generateErrorHtml(array) {
@@ -81,5 +92,14 @@ function addErrorClasses(object) {
 function removeErrorClasses(object) {
     for (const key in object) {
         document.getElementById(key).classList.remove('form-error')
+    }
+}
+
+function createEmailObject(clientName, clientEmail, clientPhone, clientInquiry) {
+    return {
+        name: clientName.trim(),
+        email: clientEmail.trim(),
+        phone: clientPhone.trim(),
+        inquiry: clientInquiry.trim(),
     }
 }
