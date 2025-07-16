@@ -12,7 +12,8 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <title>Mobile Bartender</title>
-    <link rel="stylesheet" href="./css/home/home.css">
+    <link rel="stylesheet" href="../css/services/services.css">
+    <script src="./js/navigation.js" defer async></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
             <ul>
                 <li><a href="/" class="nav-link">Home</a></li>
                 <li><a href="./services.html" class="nav-link">Services</a></li>
-                <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                <li><a href="../contact/contact.html" class="nav-link">Contact</a></li>
             </ul>
             <button type="button" class="hamburger">
                 <span></span>
@@ -44,7 +45,7 @@
                 <ul class="page-links">
                     <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="./services.html" class="nav-link">Services</a></li>
-                    <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="../contact/contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 <ul class="social-links">
                     <li>
@@ -78,15 +79,144 @@
         </div>
     </nav>
     <header class="hero">
-        <img src="./images/hero.webp" alt="hero image alt text" loading="eager" fetchpriority="high">
+        <img src="./images/bartender.webp" alt="hero image alt text" loading="eager" fetchpriority="high">
+        <div class="default-container">
+            <div class="text-content">
+                <h1>Services</h1>
+            </div>
+        </div>
+        <div class="scroll-down" aria-label="Scroll down for more content">
+            <img src="./images/svg/arrow-down.svg" alt="Scroll down for more content" loading="eager"
+                fetchpriority="high">
+        </div>
     </header>
     <main>
-        <div class="default-container">
-            <section class="wrapper">
-                failed! <a href="/" rel="noopener">go home</a>
-            </section>
-        </div>
-
+        <section class="the-services">
+            <div class="default-container">
+                <section class="service-card">
+                    <header class="left">
+                        <h2>Like Wine</h2>
+                        <img src="./images/cheers.webp" alt="party cheers" class="background-img" fetchpriority="low"
+                            loading="lazy">
+                    </header>
+                    <div class="right">
+                        <div class="intro">
+                            <img src="./images/svg/wine-glass.svg" alt="wine glass" fetchpriority="low" loading="lazy">
+                            <h3>Perfect for casual celebrations and laid-back shindigs.</h3>
+                        </div>
+                        <p>
+                            Our “Like Wine” package is the go-to for keeping things classy without breaking the
+                            bottle... we mean bank.
+                        </p>
+                        <ul>
+                            <li>4 hours of top-tier service</li>
+                            <li>one professional bartender</li>
+                            <li>mixers</li>
+                            <li>full bar setup
+                                <ul>
+                                    <li>cooler</li>
+                                    <li>clear disposable cups</li>
+                                    <li>napkins</li>
+                                    <li>straws</li>
+                                    <li>essential tools to serve patrons</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a href="./checkout.html" class="btn">Book Now
+                            <span>
+                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M7 16l6-6-6-6" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </section>
+                <section class="service-card reverse">
+                    <header class="left">
+                        <h2>Like Fine Wine</h2>
+                        <img src="./images/wine-glasses.webp" alt="wine glasses on bar top" class="background-img"
+                            fetchpriority="low" loading="lazy">
+                    </header>
+                    <div class="right">
+                        <div class="intro">
+                            <img src="./images/svg/wine-glass.svg" alt="wine glass" fetchpriority="low" loading="lazy">
+                            <h3>For those who like a little extra flair with their pour.</h3>
+                        </div>
+                        <p>
+                            Stepping things up, the “Like Fine Wine” package offers up to 6 hours of service with one
+                            bartender, the same bar setup as the basic package, and a tasty upgrade — infused mixers
+                            crafted by your bartender (or selected by you). Think rosemary gin lemonades or jalapeño
+                            pineapple margaritas — we're talking flavor you'll want to toast to twice.
+                        </p>
+                        <ul>
+                            <li>6 hours of top-tier service</li>
+                            <li>one professional bartender</li>
+                            <li>mixers</li>
+                            <li>drink infusions</li>
+                            <li>full bar setup
+                                <ul>
+                                    <li>cooler</li>
+                                    <li>clear disposable cups</li>
+                                    <li>napkins</li>
+                                    <li>straws</li>
+                                    <li>essential tools to serve patrons</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a href="./checkout.html" class="btn">Book Now
+                            <span>
+                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M7 16l6-6-6-6" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </section>
+                <section class="service-card">
+                    <header class="left">
+                        <h2>Best Damn Wine</h2>
+                        <img src="./images/sparkling-wine.webp" alt="sparkling wine" class="background-img"
+                            fetchpriority="low" loading="lazy">
+                    </header>
+                    <div class="right">
+                        <div class="intro">
+                            <img src="./images/svg/wine-glass.svg" alt="wine glass" fetchpriority="low" loading="lazy">
+                            <h3>when good enough just won't cut it.</h3>
+                        </div>
+                        <p>
+                            Our “Best Damn Wine” package is the full-bodied experience.
+                            It's our premium package for hosts who mean business but party like it's happy hour all
+                            night long.
+                        </p>
+                        <ul>
+                            <li>8 hours of top-tier service</li>
+                            <li>1-2 professional bartenders</li>
+                            <li>mixers</li>
+                            <li>drink infusions</li>
+                            <li>full bar setup
+                                <ul>
+                                    <li>cooler</li>
+                                    <li>clear disposable cups</li>
+                                    <li>napkins</li>
+                                    <li>straws</li>
+                                    <li>essential tools to serve patrons</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a href="./checkout.html" class="btn">Book Now
+                            <span>
+                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M7 16l6-6-6-6" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </section>
     </main>
     <footer class="site-footer">
         <div class="default-container">
@@ -99,9 +229,9 @@
                     </a>
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="./frequently-asked-questions.html">FAQ</a></li>
-                            <li><a href="./sitemap.html">Sitemap</a></li>
-                            <li><a href="./contact.html">contact</a></li>
+                            <li><a href="../faq/frequently-asked-questions.html">FAQ</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                            <li><a href="../contact/contact.html">contact</a></li>
                         </ul>
                     </nav>
                 </div>

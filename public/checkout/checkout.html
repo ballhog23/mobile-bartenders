@@ -12,9 +12,9 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <title>Mobile Bartender</title>
-    <link rel="stylesheet" href="./css/contact/contact.css">
+    <link rel="stylesheet" href="./css/checkout/checkout.css">
+    <script src="./js/checkout.js" defer async></script>
     <script src="./js/navigation.js" defer async></script>
-    <script src="./js/contact-form.js" defer async></script>
 </head>
 
 <body>
@@ -27,8 +27,8 @@
             </a>
             <ul>
                 <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="./services.html" class="nav-link">Services</a></li>
-                <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                <li><a href="../services/services.html" class="nav-link">Services</a></li>
+                <li><a href="../contact/contact.html" class="nav-link">Contact</a></li>
             </ul>
             <button type="button" class="hamburger">
                 <span></span>
@@ -45,8 +45,8 @@
             <div class="overlay-menu-items">
                 <ul class="page-links">
                     <li><a href="/" class="nav-link">Home</a></li>
-                    <li><a href="./services.html" class="nav-link">Services</a></li>
-                    <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="../services/services.html" class="nav-link">Services</a></li>
+                    <li><a href="../contact/contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 <ul class="social-links">
                     <li>
@@ -79,56 +79,36 @@
             </div>
         </div>
     </nav>
-    <main>
-        <div class="hero">
-            <video autoplay loop muted playsinline src="./images/skull-glass.mp4" type="video/mp4" poster="">
-            </video>
-            <div class="default-container">
-                <section class="content-wrapper">
-                    <header class="text-content">
-                        <h1>Contact Vino</h1>
-                        <p>Give me a shout</p>
-                    </header>
-                    <div class="form-errors"></div>
-                    <form id="contact-form">
-                        <div class="field-block-wrapper">
-                            <div class="field-block">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required autocomplete="on"
-                                    placeholder="Enter your name" autofocus minlength="2" maxlength="50"/>
-                            </div>
-                            <div class="field-block">
-                                <label for="email">Email Address<br/><span>example@provider.whateva</span></label>
-                                <input type="email" id="email" name="email" required autocomplete="on"
-                                    placeholder="Enter your email" minlength="3" maxlength="64" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"/>
-                            </div>
-                            <div class="field-block">
-                                <label for="phone">Telephone Number<br/><span>10 digits, no extra characters</span></label>
-                                <input type="tel" id="phone" name="phone" required autocomplete="on"
-                                    placeholder="1231234567" minlength="10" maxlength="10" pattern="\d{10}"
-                                     />
-                            </div>
-                        </div>
-                        <div class="field-block-wrapper">
-                            <div class="field-block">
-                                <label for="inquiry">Write me a message</label>
-                                <textarea type="text" name="inquiry" id="inquiry" required autocomplete="off"
-                                    autocorrect="on" minlength="10" maxlength="500"
-                                    placeholder="let's talk about your event"></textarea>
-                            </div>
-                        </div>
-                        <button class="btn" type="submit">Submit
-                            <span>
-                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
-                                    <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M7 16l6-6-6-6" />
-                                </svg>
-                            </span>
-                        </button>
-                    </form>
-                </section>
-            </div>
+    <header>
+        <div class="default-container">
+            <h1>Checkout</h1>
         </div>
+    </header>
+    <main>
+        <form id="service-form">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required autocomplete="on" />
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required autocomplete="on" />
+
+            <label for="phone">
+                Your phone number:
+                <small>Format: 123-456-7890</small>
+            </label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required autocomplete="on" />
+
+            <label for="eventDate">Event Date:</label>
+            <input type="date" id="eventDate" name="eventDate" required />
+
+            <label for="service">Choose a Service:</label>
+            <select id="service" name="service">
+                <option value="basic">Basic - $10</option>
+                <option value="premium">Premium - $20</option>
+            </select>
+
+            <button type="submit">Pay</button>
+        </form>
     </main>
     <footer class="site-footer">
         <div class="default-container">
@@ -141,9 +121,9 @@
                     </a>
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="./frequently-asked-questions.html">FAQ</a></li>
-                            <li><a href="./sitemap.html">Sitemap</a></li>
-                            <li><a href="./contact.html">contact</a></li>
+                            <li><a href="../faq/frequently-asked-questions.html">FAQ</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                            <li><a href="../contact/contact.html">contact</a></li>
                         </ul>
                     </nav>
                 </div>

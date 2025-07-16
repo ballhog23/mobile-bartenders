@@ -12,9 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <title>Mobile Bartender</title>
-    <link rel="stylesheet" href="./css/checkout/checkout.css">
-    <script src="./js/checkout.js" defer async></script>
-    <script src="./js/navigation.js" defer async></script>
+    <link rel="stylesheet" href="./css/success/success.css">
 </head>
 
 <body>
@@ -27,8 +25,8 @@
             </a>
             <ul>
                 <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="./services.html" class="nav-link">Services</a></li>
-                <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                <li><a href="../services/services.html" class="nav-link">Services</a></li>
+                <li><a href="../contact/contact.html" class="nav-link">Contact</a></li>
             </ul>
             <button type="button" class="hamburger">
                 <span></span>
@@ -45,8 +43,8 @@
             <div class="overlay-menu-items">
                 <ul class="page-links">
                     <li><a href="/" class="nav-link">Home</a></li>
-                    <li><a href="./services.html" class="nav-link">Services</a></li>
-                    <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="../services/services.html" class="nav-link">Services</a></li>
+                    <li><a href="../contact/contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 <ul class="social-links">
                     <li>
@@ -79,36 +77,13 @@
             </div>
         </div>
     </nav>
-    <header>
-        <div class="default-container">
-            <h1>Checkout</h1>
-        </div>
-    </header>
     <main>
-        <form id="service-form">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required autocomplete="on" />
-
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required autocomplete="on" />
-
-            <label for="phone">
-                Your phone number:
-                <small>Format: 123-456-7890</small>
-            </label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required autocomplete="on" />
-
-            <label for="eventDate">Event Date:</label>
-            <input type="date" id="eventDate" name="eventDate" required />
-
-            <label for="service">Choose a Service:</label>
-            <select id="service" name="service">
-                <option value="basic">Basic - $10</option>
-                <option value="premium">Premium - $20</option>
-            </select>
-
-            <button type="submit">Pay</button>
-        </form>
+        <header class="hero">
+            <div class="default-container">
+                <h1>The party is on!</h1>
+                <p>If you are not redirected shortly <span>5</span>, <a href="/">click here to return home</a></p>
+            </div>
+        </header>
     </main>
     <footer class="site-footer">
         <div class="default-container">
@@ -121,9 +96,9 @@
                     </a>
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="./frequently-asked-questions.html">FAQ</a></li>
-                            <li><a href="./sitemap.html">Sitemap</a></li>
-                            <li><a href="./contact.html">contact</a></li>
+                            <li><a href="../faq/frequently-asked-questions.html">FAQ</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                            <li><a href="../contact/contact.html">contact</a></li>
                         </ul>
                     </nav>
                 </div>
