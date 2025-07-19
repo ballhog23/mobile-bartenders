@@ -4,8 +4,7 @@ const contactForm = document.getElementById('contact-form');
 
 contactForm.addEventListener('submit', handleValidation);
 
-// this will probably be async function
-function handleValidation(event) {
+async function handleValidation(event) {
     event.preventDefault();
     const clientName = document.getElementById('name');
     const clientEmail = document.getElementById('email');
@@ -21,37 +20,48 @@ function handleValidation(event) {
     let errorMessages = [];
     let errorObject = {};
 
-    removeErrorClasses(defaultErrorMessages);
+    try {
+        removeErrorClasses(defaultErrorMessages);
 
-    if (!handleEmailValidity(clientEmail.value.trim())) {
-        errorMessages.push(defaultErrorMessages.email);
-        errorObject.email = defaultErrorMessages.email;
-    }
+        if (!handleEmailValidity(clientEmail.value.trim())) {
+            errorMessages.push(defaultErrorMessages.email);
+            errorObject.email = defaultErrorMessages.email;
+        }
 
-    if (!handleTelValidity(clientPhone.value.trim())) {
-        errorMessages.push(defaultErrorMessages.phone);
-        errorObject.phone = defaultErrorMessages.phone;
-    }
+        if (!handleTelValidity(clientPhone.value.trim())) {
+            errorMessages.push(defaultErrorMessages.phone);
+            errorObject.phone = defaultErrorMessages.phone;
+        }
 
-    if (!handleTextInputValidity(clientName.value.trim(), 2, 50)) {
-        errorMessages.push(defaultErrorMessages.name);
-        errorObject.name = defaultErrorMessages.name
-    }
+        if (!handleTextInputValidity(clientName.value.trim(), 2, 50)) {
+            errorMessages.push(defaultErrorMessages.name);
+            errorObject.name = defaultErrorMessages.name
+        }
 
-    if (!handleTextInputValidity(clientInquiry.value.trim(), 10, 500)) {
-        errorMessages.push(defaultErrorMessages.inquiry);
-        errorObject.inquiry = defaultErrorMessages.inquiry;
-    }
+        if (!handleTextInputValidity(clientInquiry.value.trim(), 10, 500)) {
+            errorMessages.push(defaultErrorMessages.inquiry);
+            errorObject.inquiry = defaultErrorMessages.inquiry;
+        }
 
-    if (errorMessages.length > 0) {
-        addErrorClasses(errorObject)
-        updateErrorMessages(formErrorsElement);
-        formErrorsElement.insertAdjacentHTML('afterbegin', generateErrorHtml(errorMessages));
-        formErrorsElement.style.display = 'block';
-    } else {
-        updateErrorMessages(formErrorsElement);
-        formErrorsElement.style.display = 'none';
-        createEmailObject(clientName.value, clientEmail.value, clientPhone.value, clientInquiry.value);
+        if (errorMessages.length > 0) {
+            addErrorClasses(errorObject)
+            updateErrorMessages(formErrorsElement);
+            formErrorsElement.insertAdjacentHTML('afterbegin', generateErrorHtml(errorMessages));
+            formErrorsElement.style.display = 'block';
+        } else {
+            updateErrorMessages(formErrorsElement);
+            formErrorsElement.style.display = 'none';
+            const data = createEmailObject(clientName.value, clientEmail.value, clientPhone.value, clientInquiry.value);
+            const response = await sendData(data);
+            
+            if (!response) {
+                console.log('something went wrong')
+            }
+
+            console.log(response)
+        }
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -98,5 +108,28 @@ function createEmailObject(clientName, clientEmail, clientPhone, clientInquiry) 
         email: clientEmail.trim(),
         phone: clientPhone.trim(),
         inquiry: clientInquiry.trim(),
+    }
+}
+
+async function sendData(object) {
+    const url = 'http://localhost:3000/contact/form-submit';
+    const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(object),
+    };
+
+    try {
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`response status: ${response.status}`)
+        }
+
+        const json = await response.json();
+        return json;
+
+    } catch (error) {
+        console.error(error.message, 'well shit')
     }
 }
