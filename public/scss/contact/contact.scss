@@ -15,22 +15,15 @@
     gap: 3.125rem;
     width: 100%;
 
-    .form-errors {
+    .success-message {
         display: none;
         border: none;
-        padding: 1rem;
-        background-color: rgba($color: $red, $alpha: 1);
+        background: none;
         width: 100%;
 
-        p,
-        span {
+        h2, p {
             text-align: center;
-            font-size: 1.125rem;
             color: $white;
-        }
-
-        span {
-            font-style: italic;
         }
     }
 

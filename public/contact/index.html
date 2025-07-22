@@ -91,17 +91,21 @@
                         <p>Give me a shout</p>
                     </header>
                     <div class="form-errors"></div>
+                    <div class="success-message">
+                        <h2>Message recieved!</h2>
+                        <p>We will be in contact soon. Thank you for reaching out.</p>
+                    </div>
                     <form id="contact-form">
                         <div class="field-block-wrapper">
                             <div class="field-block">
                                 <label for="name">Name</label>
                                 <input type="text" id="name" name="name" required autocomplete="on"
-                                    placeholder="Enter your name" autofocus minlength="2" maxlength="50"/>
+                                    placeholder="Enter your name" autofocus minlength="1" maxlength="50"/>
                             </div>
                             <div class="field-block">
                                 <label for="email">Email Address<br/><span>example@provider.whateva</span></label>
                                 <input type="email" id="email" name="email" required autocomplete="on"
-                                    placeholder="Enter your email" minlength="3" maxlength="64" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"/>
+                                    placeholder="Enter your email" minlength="5" maxlength="64" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"/>
                             </div>
                             <div class="field-block">
                                 <label for="phone">Telephone Number<br/><span>10 digits, no extra characters</span></label>
@@ -114,7 +118,7 @@
                             <div class="field-block">
                                 <label for="inquiry">Write me a message</label>
                                 <textarea type="text" name="inquiry" id="inquiry" required autocomplete="off"
-                                    autocorrect="on" minlength="10" maxlength="500"
+                                    autocorrect="on" minlength="1" maxlength="500"
                                     placeholder="let's talk about your event"></textarea>
                             </div>
                         </div>

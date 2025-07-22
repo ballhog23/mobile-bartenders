@@ -7,10 +7,12 @@ const formSubmitRoute = express.Router();
 formSubmitRoute.use(sanitizeUserInput);
 
 formSubmitRoute.post('/form-submit', (req, res, next) => {
+    console.log('hit')
     try {
-        console.log(req.body);
+        const { sanitizedInput } = req;
+        const {name} = sanitizedInput;
         sendEmail();
-        res.status(201).send({message: req.sanitizedInput})
+        res.status(201).send({ message: name })
     } catch (error) {
         console.log(error)
     }

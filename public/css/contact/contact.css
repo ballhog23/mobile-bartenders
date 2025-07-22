@@ -761,21 +761,15 @@ section {
   gap: 3.125rem;
   width: 100%;
 }
-.content-wrapper .form-errors {
+.content-wrapper .success-message {
   display: none;
   border: none;
-  padding: 1rem;
-  background-color: #9d061a;
+  background: none;
   width: 100%;
 }
-.content-wrapper .form-errors p,
-.content-wrapper .form-errors span {
+.content-wrapper .success-message h2, .content-wrapper .success-message p {
   text-align: center;
-  font-size: 1.125rem;
   color: #fff;
-}
-.content-wrapper .form-errors span {
-  font-style: italic;
 }
 .content-wrapper form {
   display: -webkit-box;
