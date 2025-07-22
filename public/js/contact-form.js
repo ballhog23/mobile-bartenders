@@ -8,13 +8,19 @@ async function submitHandler(event) {
     const formFieldsValues = formFields.values();
     const formFieldsObject = createObject(formFieldsValues, {});
     const successMessageElement = document.querySelector('.success-message');
-    const data = await sendData(formFieldsObject);
 
-    if (!data) {
-        window.alert('something has gone wrong, please refresh the page and try again.')
-    } else {
-        contactForm.style.display = "none";
-        successMessageElement.style.display = "block";
+    try {
+        const data = await sendData(formFieldsObject);
+
+        if (!data) {
+            window.alert('something has gone wrong, please refresh the page and try again.')
+        } else {
+            contactForm.style.display = "none";
+            successMessageElement.style.display = "block";
+        }
+
+    } catch (error) {
+        console.error(error.message)
     }
 }
 
