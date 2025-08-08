@@ -530,6 +530,9 @@ button {
 p {
   text-wrap: pretty;
 }
+p:has(+ p) {
+  margin-bottom: 1.5rem;
+}
 
 a {
   text-decoration: none;
@@ -832,8 +835,7 @@ section {
   border: none;
   padding: 0.625rem;
   background-color: rgba(71, 71, 71, 0.3);
-  -webkit-backdrop-filter: blur(0.625rem);
-          backdrop-filter: blur(0.625rem);
+  backdrop-filter: blur(0.625rem);
   font-size: 1rem;
 }
 .content-wrapper form .field-block-wrapper .field-block input::-webkit-input-placeholder, .content-wrapper form .field-block-wrapper .field-block textarea::-webkit-input-placeholder {
