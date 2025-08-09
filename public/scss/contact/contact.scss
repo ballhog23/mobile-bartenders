@@ -21,7 +21,8 @@
         background: none;
         width: 100%;
 
-        h2, p {
+        h2,
+        p {
             text-align: center;
             color: $white;
         }
@@ -65,7 +66,7 @@
 
                 input,
                 textarea {
-                    border: none;
+                    border: 2px solid transparent;
                     padding: .625rem;
                     background-color: rgba($color: $gray, $alpha: 0.3);
                     backdrop-filter: blur(0.625rem);
@@ -87,15 +88,23 @@
                         border: .125rem solid $red;
                     }
 
-                    &:autofill:is(:user-invalid) {
-                        border: .125rem solid $red;
-                    }
-
                     &:user-valid {
                         border: .125rem solid $green;
                     }
 
+                    &:autofill:is(:user-invalid) {
+                        border: .125rem solid $red;
+                    }
+
+                    &:autofill:invalid {
+                        border: .125rem solid $red;
+                    }
+
                     &:autofill:is(:user-valid) {
+                        border: .125rem solid $green;
+                    }
+
+                    &:autofill:valid {
                         border: .125rem solid $green;
                     }
 

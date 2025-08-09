@@ -1,11 +1,46 @@
 @import '../general.scss';
 
+// .hero {
+//     height: calc(100vh - 12.5rem);
+// }
+
 .hero {
-    height: calc(100vh - 12.5rem);
+    height: auto;
+
+    &::before {
+        all: unset;
+    }
+
+    .css-blurry-gradient {
+        position: fixed;
+        top: 0;
+        left: -20%;
+        width: 120%;
+        height: 30rem;
+        border-radius: 50%;
+        filter: blur(1rem);
+        background: radial-gradient(circle at 50% 50%, rgba(157, 6, 26, 1), rgba(157, 0, 255, 0));
+        opacity: 0.2;
+        z-index: -1;
+    }
+
+    section {
+        width: 100%;
+
+        h1 {
+            color: $red;
+        }
+
+        p {
+            color: $black;
+        }
+    }
 }
 
 .the-services {
     .service-card {
+        position: relative;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         padding-block: 6.25rem;

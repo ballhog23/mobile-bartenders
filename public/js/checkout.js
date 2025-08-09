@@ -1,9 +1,5 @@
-// front-end js
-
 // the service form
 const serviceForm = document.getElementById('service-form');
-
-// the service form fields elements
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
@@ -17,27 +13,12 @@ serviceForm.addEventListener('submit', onFormSubmit);
 async function onFormSubmit(event) {
 }
 
+// set min attr on datepicker to today
+const today = new Date();
+const year = today.getFullYear().toString();
+const month = `${today.getMonth() + 1}`; // fuckin js 0 bases the months. also cant jsut fuckin format todays date with a fuckin string..???
+const monthFormatted = month.padStart(2, 0);
+const day = today.getDate().toString().padStart(2, 0);
+const dateStringFormatted = `${year}-${monthFormatted}-${day}`;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+eventDateInput.setAttribute('min', dateStringFormatted);
