@@ -11,19 +11,6 @@
         all: unset;
     }
 
-    .css-blurry-gradient {
-        position: fixed;
-        top: 0;
-        left: -20%;
-        width: 120%;
-        height: 30rem;
-        border-radius: 50%;
-        filter: blur(1rem);
-        background: radial-gradient(circle at 50% 50%, rgba(157, 6, 26, 1), rgba(157, 0, 255, 0));
-        opacity: 0.2;
-        z-index: -1;
-    }
-
     section {
         width: 100%;
 
@@ -40,7 +27,7 @@
 .the-services {
     .service-card {
         position: relative;
-        z-index: 1;
+        // z-index: 1;
         display: flex;
         flex-direction: column;
         padding-block: 6.25rem;
@@ -103,8 +90,8 @@
             align-items: start;
             padding: 1.25rem;
             border-radius: 0 0 1.875rem 1.875rem;
-            box-shadow: .938rem .938rem 1.875rem $alt-gray,
-                -.938rem -.938rem 1.875rem $white;
+            box-shadow: .938rem .938rem 1.875rem $alt-gray;
+                background-color: $white;
 
             @media (min-width: $sm-breakpoint) {
                 padding: 2.5rem;
