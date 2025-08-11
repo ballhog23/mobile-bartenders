@@ -10,9 +10,9 @@ async function submitHandler(event) {
     const successMessageElement = document.querySelector('.success-message');
 
     try {
-        const data = await sendData(formFieldsObject);
+        const json = await sendData(formFieldsObject);
 
-        if (!data) {
+        if (!json) {
             window.alert('something has gone wrong, please refresh the page and try again.')
         } else {
             contactForm.style.display = "none";
@@ -43,18 +43,13 @@ async function sendData(object) {
         body: JSON.stringify(object),
     };
 
-    try {
-        const response = await fetch(url, options);
+    const response = await fetch(url, options);
 
-        if (!response.ok) {
-            throw new Error(`response status: ${response.status}`)
-        }
-
-        const json = await response.json();
-
-        return json;
-
-    } catch (error) {
-        console.log('send data error')
+    if (!response.ok) {
+        throw new Error(`response: ${response.status} || ${response.statusText}`)
     }
+
+    const json = await response.json();
+
+    return json;
 }

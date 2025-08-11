@@ -5,7 +5,15 @@ const checkoutController = express();
 // checkoutController.use(sanitizeUserInput);
 
 checkoutController.post('/create-stripe-session', (req, res, next) => {
-    res.status(201).send('create stripe session')
+    
+    try {
+        console.log('hit')
+        console.log(req.body)
+        res.status(201).send({status: 'redir'})
+        console.log('sent')
+    } catch (error) {
+        console.error(error.message)
+    }
 })
 
 export default checkoutController;
