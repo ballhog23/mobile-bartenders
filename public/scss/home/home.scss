@@ -62,7 +62,7 @@
 
                     h3 {
                         font-size: 1.5rem;
-                        @include gradientText($red);
+                        color: $red;
                     }
 
                     img {
@@ -104,7 +104,10 @@
 
     .left {
         flex-direction: column;
-        gap: 4rem;
+        
+        h2 {
+            margin-bottom: 3.75rem;
+        }
 
         h2,
         p {

@@ -6,6 +6,7 @@
     z-index: 100;
     background-color: $white;
     padding-block: .938rem;
+    filter: drop-shadow(0 -1rem 1rem $black);
 
     @media (width >=$md-breakpoint) {
         padding-block: 1.25rem;

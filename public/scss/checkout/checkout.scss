@@ -1,18 +1,157 @@
 @import '../general.scss';
 
-header {
-    padding-top: 4.375rem;
-    height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.hero {
+    height: auto;
 
-    @media only screen and (min-width: $md-breakpoint) {
-        padding-top: 6.25rem;
+    &::before {
+        all: unset;
     }
 
-    h1 {
-        color: $black;
-        @include gradientText($red);
+    .css-blurry-gradient {
+        position: fixed;
+        top: 0;
+        left: -20rem;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        filter: blur(3rem);
+        background: radial-gradient(circle at 50% 50%, rgba($color: $red, $alpha: 1), rgba(157, 0, 255, 0));
+        opacity: 0.2;
+        z-index: -1;
+    }
+
+    section {
+        width: 100%;
+
+        h1 {
+            color: $red;
+        }
+
+        p {
+            color: $black;
+        }
+    }
+}
+
+main {
+    section {
+        padding-top: 0;
+    }
+}
+
+form {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background: none;
+
+    @media only screen and (min-width: $sm-breakpoint) {
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .field-block-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+
+        @media only screen and (min-width: $sm-breakpoint) {
+            width: calc((100% - 1 * 2rem) / 2);
+        }
+
+        .field-block {
+            display: flex;
+            flex-direction: column;
+            // height: 100%;
+            width: 100%;
+            gap: 0.25rem;
+
+            label,
+            input,
+            select {
+                font-family: $roboto-sans;
+                color: $black;
+                letter-spacing: .063rem;
+            }
+
+            input,
+            select {
+                height: 2.813rem;
+                border: 2px solid transparent;
+                padding: .625rem;
+                background-color: rgba($color: $gray, $alpha: 0.3);
+                backdrop-filter: blur(0.625rem);
+                font-family: $roboto-sans;
+                font-size: 1rem;
+
+                &::placeholder {
+                    font-size: .875rem;
+                    text-transform: capitalize;
+                    font-style: italic;
+                    font-weight: 500;
+                    color: rgba($color: $black, $alpha: 0.5);
+                }
+
+                &:focus-visible {
+                    background-color: rgba($color: $gray, $alpha: 0.6);
+                }
+
+                &:user-invalid {
+                    border: .125rem solid $red;
+                }
+
+                &:user-valid {
+                    border: .125rem solid $green;
+                }
+
+                &:autofill:is(:user-invalid) {
+                    border: .125rem solid $red;
+                }
+
+                &:autofill:invalid {
+                    border: .125rem solid $red;
+                }
+
+                &:autofill:is(:user-valid) {
+                    border: .125rem solid $green;
+                }
+
+                &:autofill:valid {
+                    border: .125rem solid $green;
+                }
+
+                &.form-error {
+                    border: .125rem solid $red !important;
+                }
+            }
+
+            label {
+                font-family: $roboto-serif;
+                font-size: 1.125rem;
+                font-weight: 600;
+                letter-spacing: 0.125rem;
+                text-transform: capitalize;
+                line-height: 1;
+
+                @media (min-width: $md-breakpoint) {
+                    font-size: 1.25rem;
+                }
+
+                span {
+                    font-size: 0.750rem;
+                    font-family: $roboto-sans;
+                    font-weight: 400;
+                    color: $black;
+                    text-transform: lowercase;
+                }
+            }
+        }
+    }
+
+    .btn {
+        margin: auto 0 0 auto;
     }
 }

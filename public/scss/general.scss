@@ -65,6 +65,10 @@ button {
 
 p {
   text-wrap: pretty;
+
+  &:has(+ p) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 a {

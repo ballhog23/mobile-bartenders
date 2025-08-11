@@ -12,16 +12,16 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <title>Mobile Bartender</title>
-    <link rel="stylesheet" href="./css/checkout/checkout.css">
-    <script src="./js/checkout.js" defer async></script>
-    <script src="./js/navigation.js" defer async></script>
+    <link rel="stylesheet" href="../css/checkout/checkout.css">
+    <script src="../js/checkout.js" defer async></script>
+    <script src="../js/navigation.js" defer async></script>
 </head>
 
 <body>
     <nav class="navbar">
         <div class="default-container">
             <a href="/" class="brand">
-                <img src="./images/svg/logo.svg" alt="Cocktails by VINO logo mobile bartender" loading="eager"
+                <img src="../images/svg/logo.svg" alt="Cocktails by VINO logo mobile bartender" loading="eager"
                     fetchpriority="high">
                 Cocktails by VINO
             </a>
@@ -39,7 +39,7 @@
     </nav>
     <nav class="nav-overlay hidden">
         <div class="background-image">
-            <img src="./images/svg/wine-bottle.svg" loading="lazy" fetchpriority="low" alt="wine bottle">
+            <img src="../images/svg/wine-bottle.svg" loading="lazy" fetchpriority="low" alt="wine bottle">
         </div>
         <div class="default-container">
             <div class="overlay-menu-items">
@@ -79,43 +79,70 @@
             </div>
         </div>
     </nav>
-    <header>
+    <header class="hero">
+        <div class="css-blurry-gradient"></div>
         <div class="default-container">
-            <h1>Checkout</h1>
+            <section class="content-wrapper">
+                <h1>Checkout</h1>
+                <p>It's party time</p>
+            </section>
         </div>
     </header>
     <main>
-        <form id="service-form">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required autocomplete="on" />
-
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required autocomplete="on" />
-
-            <label for="phone">
-                Your phone number:
-                <small>Format: 123-456-7890</small>
-            </label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required autocomplete="on" />
-
-            <label for="eventDate">Event Date:</label>
-            <input type="date" id="eventDate" name="eventDate" required />
-
-            <label for="service">Choose a Service:</label>
-            <select id="service" name="service">
-                <option value="basic">Basic - $10</option>
-                <option value="premium">Premium - $20</option>
-            </select>
-
-            <button type="submit">Pay</button>
-        </form>
+        <div class="default-container">
+            <section>
+                <form id="service-form">
+                    <div class="field-block-wrapper">
+                        <div class="field-block">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required autocomplete="on"
+                                    placeholder="Enter your name" minlength="1" maxlength="50"/>
+                        </div>
+                        <div class="field-block">
+                            <label for="email">Email Address<br /></label>
+                            <input type="email" id="email" name="email" required autocomplete="on"
+                                placeholder="example@provider.com" minlength="5" maxlength="64"
+                                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" />
+                        </div>
+                        <div class="field-block">
+                            <label for="phone">Telephone Number<br /><span>10 digits, no extra characters</span></label>
+                            <input type="tel" id="phone" name="phone" required autocomplete="on"
+                                placeholder="1231234567" minlength="10" maxlength="10" pattern="\d{10}" />
+                        </div>
+                    </div>
+                    <div class="field-block-wrapper">
+                        <div class="field-block">
+                            <label for="eventDate">Event Date:</label>
+                            <input type="date" id="eventDate" name="eventDate" required />
+                        </div>
+                        <div class="field-block">
+                            <label for="service">Choose a Service:</label>
+                            <select id="service" name="service">
+                                <option value="" selected disabled hidden>Select A Service</option>
+                                <option value="basic">Basic - $300</option>
+                                <option value="basic">Mid - $400</option>
+                                <option value="premium">Premium - $500</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Checkout
+                            <span>
+                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16l6-6-6-6" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
     </main>
     <footer class="site-footer">
         <div class="default-container">
             <div class="footer-content-wrapper">
                 <div class="left">
                     <a href="/" class="brand">
-                        <img src="./images/svg/logo.svg" alt="Cocktails by VINO logo mobile bartender" loading="lazy"
+                        <img src="../images/svg/logo.svg" alt="Cocktails by VINO logo mobile bartender" loading="lazy"
                             fetchpriority="low">
                         Cocktails by VINO
                     </a>
