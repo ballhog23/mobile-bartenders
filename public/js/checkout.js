@@ -11,6 +11,7 @@ serviceForm.addEventListener('submit', onFormSubmit);
 
 // async function to handle for submission
 async function onFormSubmit(event) {
+    
 }
 
 // set min attr on datepicker to today

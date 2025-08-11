@@ -1,10 +1,11 @@
 import express from 'express';
-import formSubmitRoute from '../controllers/contact.js';
+import formController from '../controllers/contact.js';
+import checkoutController from '../controllers/checkout.js';
 const contactRouter = express.Router();
 const checkoutRouter = express.Router();
 
-contactRouter.use('/contact', formSubmitRoute);
-// checkoutRouter.use('/checkout', (req, res, next) => next());
+contactRouter.use('/contact', formController);
+checkoutRouter.use('/checkout', checkoutController);
 
 const routes = [contactRouter, checkoutRouter];
 

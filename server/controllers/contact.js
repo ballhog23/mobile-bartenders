@@ -2,11 +2,11 @@
 import express from 'express';
 import sanitizeUserInput from '../middlewares/sanitizeUserInput.js';
 import sendEmail from '../services/sendEmail.js';
-const formSubmitRoute = express.Router();
+const formController = express.Router();
 
-formSubmitRoute.use(sanitizeUserInput);
+formController.use(sanitizeUserInput);
 
-formSubmitRoute.post('/form-submit', (req, res, next) => {
+formController.post('/form-submit', (req, res, next) => {
     console.log('hit')
     try {
         const { sanitizedInput } = req;
@@ -18,4 +18,4 @@ formSubmitRoute.post('/form-submit', (req, res, next) => {
     }
 });
 
-export default formSubmitRoute;
+export default formController;
