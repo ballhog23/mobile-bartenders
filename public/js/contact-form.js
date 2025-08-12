@@ -17,6 +17,7 @@ async function submitHandler(event) {
         } else {
             contactForm.style.display = "none";
             successMessageElement.style.display = "block";
+            successMessageElement.firstElementChild.insertAdjacentText('beforeend', `, ${json.message}!`)
         }
 
     } catch (error) {

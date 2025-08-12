@@ -7,10 +7,10 @@ const formController = express.Router();
 formController.use(sanitizeUserInput);
 
 formController.post('/form-submit', (req, res, next) => {
-    console.log('hit')
+    console.log('hit /form-submit')
     try {
         const { sanitizedInput } = req;
-        const {name} = sanitizedInput;
+        const { name } = sanitizedInput;
         sendEmail();
         res.status(201).send({ message: name })
     } catch (error) {
