@@ -37,7 +37,7 @@ function createObject(formFieldsNodeList, object) {
 }
 
 async function sendData(object) {
-    const url = 'http://localhost:3000/contact/form-submit';
+    const url = 'https://localhost:3000/contact/form-submit';
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
