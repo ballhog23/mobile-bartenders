@@ -1,16 +1,13 @@
 // sanitize contact form user input data
 
 const sanitizeUserInput = (req, res, next) => {
-    
-    const { body } = req;
-    const formFields = structuredClone(body);
-    const formFieldsIterator = Object.entries(formFields);
-    
-    for (const [key, value] of formFieldsIterator) {
+    const validatedOutput = req.validatedOutput;
+        
+    for (const [key, value] of Object.entries(validatedOutput)) {
         console.log('SANITIZIZING: ', key);
     }
 
-    req.sanitizedInput = {...formFields};
+    req.sanitizedOutput = {...validatedOutput};
 
     next();
 };
