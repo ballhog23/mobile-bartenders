@@ -1,17 +1,13 @@
-// handles scrolling functionality
 const scrollToTopButton = document.querySelector('.scroll-to-top');
 const heroElement = document.querySelector('.hero');
 const navbarHeight = document.querySelector('.navbar').offsetHeight;
 
-// scroll to top functionality
 scrollToTopButton.addEventListener('click', (event) => {
     event.preventDefault();
     scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// show/hide scroll to top button
 heroObserver();
-
 
 function heroObserver() {
     const options = {

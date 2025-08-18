@@ -8,10 +8,11 @@ const validateUserInput = (req, res, next) => {
 
     for (const [key, value] of Object.entries(formFields)) {
         if (typeof value !== 'string') throw new Error('form field value is something other than a string')
-        console.log('validating: ',typeof key, key, typeof value, value);
+        console.log('validating: ', typeof key, key, typeof value, value);
     }
 
     req.validatedOutput = { ...formFields };
+
     next();
 }
 

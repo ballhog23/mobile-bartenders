@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+        rel="preload" as="style" onload="this.rel='stylesheet'">
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+        rel="preload" as="style" onload="this.rel='stylesheet'">
     <title>Mobile Bartender</title>
     <link rel="stylesheet" href="../css/checkout/checkout.css">
     <script src="../js/checkout.js" defer async></script>
@@ -92,7 +92,7 @@
     <main>
         <div class="default-container">
             <section>
-                <form id="service-form">
+                <form id="service-form" method="POST">
                     <div class="field-block-wrapper">
                         <div class="field-block">
                                 <label for="name">Name</label>
@@ -121,7 +121,7 @@
                             <select id="service" name="service" required>
                                 <option value="" selected disabled hidden>Select A Service</option>
                                 <option value="basic">Basic - $300</option>
-                                <option value="basic">Mid - $400</option>
+                                <option value="mid">Mid - $400</option>
                                 <option value="premium">Premium - $500</option>
                             </select>
                         </div>

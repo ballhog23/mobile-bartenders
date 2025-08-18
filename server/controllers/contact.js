@@ -9,7 +9,6 @@ formController.use(validateUserInput);
 formController.use(sanitizeUserInput);
 
 formController.post('/form-submit', (req, res, next) => {
-    console.log('hit /form-submit')
     try {
         const { sanitizedOutput } = req;
         const { name } = sanitizedOutput;

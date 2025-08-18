@@ -6,7 +6,7 @@ const today = new Date();
 const tomorrow = new Date(today);
 tomorrow.setDate(today.getDate() + 1);
 const year = tomorrow.getFullYear().toString();
-const month = `${tomorrow.getMonth() + 1}`; // fuckin js 0 bases the months. also cant jsut fuckin format todays date with a fuckin string..???
+const month = `${tomorrow.getMonth() + 1}`; // js dates are weird
 const monthFormatted = month.padStart(2, 0);
 const day = tomorrow.getDate().toString().padStart(2, 0);
 const dateStringFormatted = `${year}-${monthFormatted}-${day}`;
@@ -27,8 +27,11 @@ async function onFormSubmit(event) {
             throw new Error('there was an error awaiting the json')
         }
 
+        // send user to stripe
+        window.location.href = json.url;
+
     } catch (error) {
-        console.error('there was an issue')
+        console.error(`ERROR_NAME: ${error.name}\n MESSAGE: ${error.message}`)
     }
 }
 
@@ -49,6 +52,7 @@ async function sendData(object) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(object),
+        redirect: 'follow'
     };
 
     const response = await fetch(url, options);

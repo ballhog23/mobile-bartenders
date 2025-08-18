@@ -21,7 +21,7 @@ async function submitHandler(event) {
         }
 
     } catch (error) {
-        console.error(error.message)
+        console.error(error.name, error.message)
     }
 }
 
