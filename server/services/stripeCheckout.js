@@ -1,4 +1,3 @@
-// logic for stripe checkout flow
 import Stripe from "stripe";
 import servicesDefinition from "../utils/checkout/servicesDefinition.js";
 

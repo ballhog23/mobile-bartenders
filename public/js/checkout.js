@@ -26,9 +26,9 @@ async function onFormSubmit(event) {
         if (!json) {
             throw new Error('there was an error awaiting the json')
         }
+
         // send user to stripe
         window.location.href = json.url;
-
 
     } catch (error) {
         console.error(`ERROR_NAME: ${error.name}\n MESSAGE: ${error.message}`)
