@@ -4,7 +4,7 @@ import servicesDefinition from "../utils/checkout/servicesDefinition.js";
 const stripeCheckout = async (req) => {
     try {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST);
-        const { service, eventDate } = req;
+        const { service, eventDate, email } = req;
         const { price, name } = servicesDefinition[service];
         const formattedEventDate = new Date(eventDate).toDateString();
         const lineItems = [{
@@ -21,6 +21,7 @@ const stripeCheckout = async (req) => {
 
         const session = await stripe.checkout.sessions.create({
             line_items: lineItems,
+            customer_email: email,
             mode: 'payment',
             success_url: "http://localhost:3000/success",
             cancel_url: "http://localhost:3000/cancel"
