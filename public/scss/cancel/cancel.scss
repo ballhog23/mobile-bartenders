@@ -1,1 +1,28 @@
 @import '../general.scss';
+
+.hero {
+    height: auto;
+
+    &::before {
+        all: unset;
+    }
+
+    section {
+        width: 100%;
+
+        h1 {
+            color: $red;
+        }
+
+        p {
+            color: $black;
+        }
+    }
+}
+
+main {
+    a {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+}

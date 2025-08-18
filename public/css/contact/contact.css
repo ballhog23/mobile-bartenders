@@ -377,21 +377,16 @@ html.overlay-nav-open .nav-overlay ul {
 }
 .hero .css-blurry-gradient {
   position: fixed;
-  top: 4.688rem;
+  top: 0;
   left: -20%;
   width: 100%;
-  height: 100%;
+  height: 65%;
   border-radius: 50%;
   -webkit-filter: blur(1rem);
           filter: blur(1rem);
   background: radial-gradient(circle at 50% 50%, #9d061a, rgba(157, 0, 255, 0));
   opacity: 0.2;
   z-index: -1;
-}
-@media only screen and (min-width: 36rem) {
-  .hero .css-blurry-gradient {
-    padding-block: 6.25rem;
-  }
 }
 
 .site-footer {
@@ -512,6 +507,7 @@ h1 {
 
 h2 {
   font-size: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
 h3 {
@@ -561,7 +557,7 @@ p {
   text-wrap: pretty;
 }
 p:has(+ p) {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 a {

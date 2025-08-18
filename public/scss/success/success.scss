@@ -1,23 +1,28 @@
 @import '../general.scss';
 
 .hero {
+    height: auto;
+
     &::before {
         all: unset;
     }
 
-    .default-container {
-        flex-direction: column;
-        justify-content: center;
-        gap: 4rem;
+    section {
+        width: 100%;
 
-        h1{
-            @include gradientText($red);
+        h1 {
+            color: $red;
         }
 
-        a {
-            font-style: italic;
-            text-decoration: underline;
-            font-weight: 600;
+        p {
+            color: $black;
         }
+    }
+}
+
+main {
+    a {
+        font-weight: bold;
+        text-decoration: underline;
     }
 }
