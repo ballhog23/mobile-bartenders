@@ -1,7 +1,16 @@
 const servicesDefinition = {
-    basic: 300,
-    mid: 400,
-    premium: 500
+    basic: {
+        price: 30000,
+        name: 'Like Wine'
+    },
+    mid: {
+        price: 40000,
+        name: 'Like Fine Wine'
+    },
+    premium: {
+        price: 50000,
+        name: "Best Damn Wine"
+    }
 };
 
 export default servicesDefinition;

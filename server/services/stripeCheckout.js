@@ -4,14 +4,17 @@ import servicesDefinition from "../utils/checkout/servicesDefinition.js";
 const stripeCheckout = async (req) => {
     try {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST);
-        const { service } = req;
+        const { service, eventDate } = req;
+        const { price, name } = servicesDefinition[service];
+        const formattedEventDate = new Date(eventDate).toDateString();
         const lineItems = [{
             quantity: 1,
             price_data: {
                 currency: 'usd',
-                unit_amount: servicesDefinition[service],
+                unit_amount: price,
                 product_data: {
-                    name: service,
+                    name: name,
+                    description: `You are booking the "${name} service" for your event on ${formattedEventDate}.`
                 }
             },
         }];
@@ -24,7 +27,6 @@ const stripeCheckout = async (req) => {
         })
 
         if (!session) throw new Error('ERROR CREATING STRIPE CHECKOUT SESSION');
-        console.log('success, passing session to controller to redirect')
 
         return session;
 
