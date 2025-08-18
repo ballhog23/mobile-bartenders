@@ -11,10 +11,7 @@ checkoutController.post('/create-stripe-session', async (req, res, next) => {
     try {
         const sanitizedOutput = req.sanitizedOutput;
         const stripeCheckoutSession = await stripeCheckout(sanitizedOutput);
-
-        if (!stripeCheckoutSession) throw new Error('stripe checkout session not returned');
-
-        res.redirect(303, stripeCheckoutSession.url)
+        res.status(201).send({url: stripeCheckoutSession.url});
 
     } catch(error) {
         throw new Error(`there was an ERROR posting data to /create-stripe-session.\n ERROR_NAME: ${error.name} \n ERROR_MESSAGE: ${error.message}`)

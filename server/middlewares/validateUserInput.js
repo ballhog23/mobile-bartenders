@@ -12,6 +12,7 @@ const validateUserInput = (req, res, next) => {
     }
 
     req.validatedOutput = { ...formFields };
+    
     next();
 }
 

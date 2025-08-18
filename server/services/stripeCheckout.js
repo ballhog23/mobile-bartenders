@@ -20,12 +20,13 @@ const stripeCheckout = async (req) => {
         const session = await stripe.checkout.sessions.create({
             line_items: lineItems,
             mode: 'payment',
-            success_url: "https://calebpirkle.com/success",
-            cancel_url: "https://calebpirkle.com/cancel"
+            success_url: "http://localhost:3000/success",
+            cancel_url: "http://localhost:3000/cancel"
         })
 
         if (!session) throw new Error('ERROR CREATING STRIPE CHECKOUT SESSION');
         console.log('success, passing session to controller to redirect')
+
         return session;
 
     } catch (error) {
