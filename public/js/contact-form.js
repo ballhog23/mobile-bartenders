@@ -36,8 +36,6 @@ async function submitHandler(event) {
                     errorField.style.borderColor = '#9d061a'
                 }
             }
-
-
         } else {
             formErrorsElement.style.display = "none";
             contactForm.style.display = "none";
