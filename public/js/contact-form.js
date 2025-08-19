@@ -27,12 +27,10 @@ async function submitHandler(event) {
             for (const error of Object.values(errors)) {
                 const { name, errorMessage } = error;
                 const element = document.createElement('p');
+                const errorField = document.getElementById(name); // form field if error is present for field
                 element.id = `${name}-error`;
                 element.innerText = errorMessage;
                 formErrorsElement.insertAdjacentElement('afterbegin', element);
-
-                // set custom validity
-                const errorField = document.getElementById(name);
 
                 if (errorField) {
                     errorField.style.borderColor = '#9d061a'
