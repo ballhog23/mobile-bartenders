@@ -801,6 +801,15 @@ section {
   text-align: center;
   color: #fff;
 }
+.content-wrapper .form-errors {
+  display: none;
+  height: auto;
+  padding: 1.25rem;
+  background-color: rgba(157, 6, 26, 0.6);
+}
+.content-wrapper .form-errors > * {
+  color: #fff;
+}
 .content-wrapper form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -911,7 +920,7 @@ section {
 }
 .content-wrapper form .field-block-wrapper .field-block input:user-valid,
 .content-wrapper form .field-block-wrapper .field-block textarea:user-valid {
-  border: 0.125rem solid green;
+  border: 0.125rem solid #008000;
 }
 .content-wrapper form .field-block-wrapper .field-block input:autofill:is(:user-invalid),
 .content-wrapper form .field-block-wrapper .field-block textarea:autofill:is(:user-invalid) {
@@ -923,11 +932,11 @@ section {
 }
 .content-wrapper form .field-block-wrapper .field-block input:autofill:is(:user-valid),
 .content-wrapper form .field-block-wrapper .field-block textarea:autofill:is(:user-valid) {
-  border: 0.125rem solid green;
+  border: 0.125rem solid #008000;
 }
 .content-wrapper form .field-block-wrapper .field-block input:autofill:valid,
 .content-wrapper form .field-block-wrapper .field-block textarea:autofill:valid {
-  border: 0.125rem solid green;
+  border: 0.125rem solid #008000;
 }
 .content-wrapper form .field-block-wrapper .field-block input.form-error,
 .content-wrapper form .field-block-wrapper .field-block textarea.form-error {

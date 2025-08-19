@@ -7,14 +7,41 @@ async function submitHandler(event) {
     const formFields = contactForm.querySelectorAll('label+[name]');
     const formFieldsValues = formFields.values();
     const formFieldsObject = createObject(formFieldsValues, {});
+    const formErrorsElement = document.querySelector('.form-errors');
     const successMessageElement = document.querySelector('.success-message');
 
     try {
         const json = await sendData(formFieldsObject);
+        const { errors } = json;
 
-        if (!json) {
-            window.alert('something has gone wrong, please refresh the page and try again.')
+        if (errors) {
+            formErrorsElement.style.display = "block";
+
+            if (formErrorsElement.hasChildNodes()) {
+                const currentErrors = Array.from(formErrorsElement.childNodes);
+                currentErrors.forEach(element => element.remove());
+            }
+
+            formFields.forEach(element => element.style.removeProperty('border-color'));
+
+            for (const error of Object.values(errors)) {
+                const { name, errorMessage } = error;
+                const element = document.createElement('p');
+                element.id = `${name}-error`;
+                element.innerText = errorMessage;
+                formErrorsElement.insertAdjacentElement('afterbegin', element);
+
+                // set custom validity
+                const errorField = document.getElementById(name);
+
+                if (errorField) {
+                    errorField.style.borderColor = '#9d061a'
+                }
+            }
+
+
         } else {
+            formErrorsElement.style.display = "none";
             contactForm.style.display = "none";
             successMessageElement.style.display = "block";
             successMessageElement.firstElementChild.insertAdjacentText('beforeend', `, ${json.message}!`)
@@ -37,7 +64,7 @@ function createObject(formFieldsNodeList, object) {
 }
 
 async function sendData(object) {
-    const url = 'https://localhost:3000/contact/form-submit';
+    const url = 'http://localhost:3000/contact/form-submit';
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,7 +74,7 @@ async function sendData(object) {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-        throw new Error(`response: ${response.status} || ${response.statusText}`)
+        // throw new Error(`response: ${response.status} || ${response.statusText}`)
     }
 
     const json = await response.json();

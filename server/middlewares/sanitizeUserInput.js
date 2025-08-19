@@ -1,4 +1,4 @@
-// sanitize contact form user input data
+import validator from 'validator';
 
 const sanitizeUserInput = (req, res, next) => {
     const validatedOutput = req.validatedOutput;

@@ -28,6 +28,17 @@
         }
     }
 
+    .form-errors {
+        display: none;
+        height: auto;
+        padding: 1.25rem;
+        background-color: rgba($color: $red, $alpha: 0.6);
+
+        >* {
+            color: $white;
+        }
+    }
+
     form {
         display: flex;
         flex-direction: column;
