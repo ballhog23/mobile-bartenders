@@ -99,26 +99,26 @@
                         <div class="field-block-wrapper">
                             <div class="field-block">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name"  autocomplete="on"
-                                    placeholder="Enter your name" />
+                                <input type="text" id="name" name="name" required autocomplete="on"
+                                    placeholder="Enter your name" minlength="1" maxlength="50"/>
                             </div>
                             <div class="field-block">
                                 <label for="email">Email Address<br/><span>example@provider.whateva</span></label>
-                                <input type="email" id="email" name="email"  autocomplete="on"
-                                    placeholder="Enter your email" />
+                                <input type="email" id="email" name="email" required autocomplete="on"
+                                    placeholder="Enter your email" minlength="5" maxlength="64" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"/>
                             </div>
                             <div class="field-block">
                                 <label for="phone">Telephone Number<br/><span>10 digits, no extra characters</span></label>
-                                <input type="tel" id="phone" name="phone"  autocomplete="on"
-                                    placeholder="1231234567" 
+                                <input type="tel" id="phone" name="phone" required autocomplete="on"
+                                    placeholder="1231234567" minlength="10" maxlength="10" pattern="\d{10}"
                                      />
                             </div>
                         </div>
                         <div class="field-block-wrapper">
                             <div class="field-block">
                                 <label for="inquiry">Write me a message</label>
-                                <textarea type="text" name="inquiry" id="inquiry"  autocomplete="off"
-                                    autocorrect="on" 
+                                <textarea type="text" name="inquiry" id="inquiry" required autocomplete="off"
+                                    autocorrect="on" minlength="1" maxlength="500"
                                     placeholder="let's talk about your event"></textarea>
                             </div>
                         </div>

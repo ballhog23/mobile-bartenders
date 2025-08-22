@@ -1,10 +1,47 @@
 const contactForm = document.getElementById('contact-form');
+const formFields = contactForm.querySelectorAll('label+[name]')
 
 contactForm.addEventListener('submit', submitHandler);
+contactForm.addEventListener('blur', validateUserInput, true);
+
+function validateUserInput(event) {
+    const input = event.target;
+    const id = input.id;
+    const validityObject = input.validity;
+    const button = contactForm.querySelector('button')
+    const formFieldsDefintion = {
+        name: {
+            name: 'name',
+            errorMessage: 'Please enter your legal name'
+        },
+        email: {
+            name: 'email',
+            errorMessage: 'Invalid email format. Use this format: example@domain.com'
+        },
+        phone: {
+            name: 'phone',
+            errorMessage: 'Invalid phone format. Only Digits. No area code. Use this format: 1231231234'
+        },
+        inquiry: {
+            name: 'inquiry',
+            errorMessage: 'Please enter a message'
+        },
+    };
+
+    if (input !== button) {
+        const errorMessage = formFieldsDefintion[id].errorMessage;
+        input.checkValidity();
+
+        if (validityObject.tooShort || validityObject.tooLong || validityObject.patternMismatch || validityObject.valueMissing) {
+            input.setCustomValidity(errorMessage)
+        } else {
+            input.setCustomValidity('')
+        }
+    }
+}
 
 async function submitHandler(event) {
     event.preventDefault();
-    const formFields = contactForm.querySelectorAll('label+[name]');
     const formFieldsValues = formFields.values();
     const formFieldsObject = createObject(formFieldsValues, {});
     const formErrorsElement = document.querySelector('.form-errors');
@@ -48,17 +85,6 @@ async function submitHandler(event) {
     }
 }
 
-function createObject(formFieldsNodeList, object) {
-
-    for (const element of formFieldsNodeList) {
-        const key = element.name;
-        const value = element.value.trim();
-        object[key] = value;
-    };
-
-    return object;
-}
-
 async function sendData(object) {
     const url = 'http://localhost:3000/contact/form-submit';
     const options = {
@@ -76,4 +102,15 @@ async function sendData(object) {
     const json = await response.json();
 
     return json;
+}
+
+function createObject(formFieldsNodeList, object) {
+
+    for (const element of formFieldsNodeList) {
+        const key = element.name;
+        const value = element.value.trim();
+        object[key] = value;
+    };
+
+    return object;
 }

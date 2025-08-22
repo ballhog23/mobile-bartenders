@@ -1,13 +1,14 @@
 import validator from 'validator';
 
 const sanitizeUserInput = (req, res, next) => {
-    const validatedOutput = req.validatedOutput;
+    const { validatedInput } = req;
 
-    for (const [key, value] of Object.entries(validatedOutput)) {
-        console.log('SANITIZIZING: ', key);
+    for (const [key, value] of Object.entries(validatedInput)) {
+        // shouldn't have to sanitize the key in this case because the user is not messing with it and
+        validatedInput[key] = validator.escape(value);
     }
-
-    req.sanitizedOutput = { ...validatedOutput };
+    console.log(validatedInput)
+    req.sanitizedOutput = { ...validatedInput };
 
     next();
 };

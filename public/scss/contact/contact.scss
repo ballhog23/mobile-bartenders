@@ -95,6 +95,14 @@
                         background-color: rgba($color: $gray, $alpha: 1);
                     }
 
+                    // &:invalid {
+                    //     border: .125rem solid $red;
+                    // }
+
+                    // &:valid {
+                    //     border: .125rem solid $green;
+                    // }
+
                     &:user-invalid {
                         border: .125rem solid $red;
                     }
