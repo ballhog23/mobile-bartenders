@@ -8,7 +8,6 @@ const validateUserInput = (req, res, next) => {
         const formFields = { ...body }; // shallow copy
         const errorsArray = [];
 
-        console.log('b4: ', formFields)
         for (const [key, value] of Object.entries(formFields)) {
             const clientErrorMessageObject = formFieldsDefiniton[key];
 

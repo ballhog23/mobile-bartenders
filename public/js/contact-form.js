@@ -35,6 +35,7 @@ function validateUserInput(event) {
         if (validityObject.tooShort || validityObject.tooLong || validityObject.patternMismatch || validityObject.valueMissing) {
             input.setCustomValidity(errorMessage)
         } else {
+            input.style.removeProperty('border-color')
             input.setCustomValidity('')
         }
     }
@@ -96,7 +97,7 @@ async function sendData(object) {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-        // throw new Error(`response: ${response.status} || ${response.statusText}`)
+        // throw new Error(`Network response was not ok`)
     }
 
     const json = await response.json();
