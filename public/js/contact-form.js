@@ -87,7 +87,8 @@ async function submitHandler(event) {
 }
 
 async function sendData(object) {
-    const url = 'http://localhost:3000/contact/form-submit';
+    const url = 'https://calebpirkle.com/contact/form-submit';
+    // const url = 'http://localhost:3000/contact/form-submit';
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -97,7 +98,7 @@ async function sendData(object) {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-        // throw new Error(`Network response was not ok`)
+        throw new Error(`network error`)
     }
 
     const json = await response.json();

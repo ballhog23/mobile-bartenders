@@ -21,14 +21,9 @@ async function onFormSubmit(event) {
     const formFieldsData = createObject(formFieldsValues, {});
 
     try {
-        const json = await sendData(formFieldsData);
-
-        if (!json) {
-            throw new Error('there was an error awaiting the json')
-        }
-
+        const res = await sendData(formFieldsData);
         // send user to stripe
-        window.location.href = json.url;
+        window.location.href = res.url;
 
     } catch (error) {
         console.error(`ERROR_NAME: ${error.name}\n MESSAGE: ${error.message}`)
@@ -47,21 +42,21 @@ function createObject(formFieldsIterator, object) {
 }
 
 async function sendData(object) {
-    const url = 'http://localhost:3000/checkout/create-stripe-session';
+    // const url = 'http://localhost:3000/checkout/create-stripe-session';
+    const url = 'https://calebpirkle.com/checkout/create-stripe-session';
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(object),
-        redirect: 'follow'
+        body: JSON.stringify(object)
     };
 
     const response = await fetch(url, options);
 
     if (!response.ok) {
-        throw new Error(`response: ${response.status} || ${response.statusText}`)
+        throw new Error(`error posting to stripe session`)
     }
 
-    const json = await response.json();
+    const data = await response.json()
 
-    return json;
+    return data;
 }

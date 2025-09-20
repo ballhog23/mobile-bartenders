@@ -4,10 +4,10 @@ const sanitizeUserInput = (req, res, next) => {
     const { validatedInput } = req;
 
     for (const [key, value] of Object.entries(validatedInput)) {
-        // shouldn't have to sanitize the key in this case because the user is not messing with it and
+        // shouldn't have to sanitize the key in this case
         validatedInput[key] = validator.escape(value);
     }
-    console.log(validatedInput)
+
     req.sanitizedOutput = { ...validatedInput };
 
     next();

@@ -35,10 +35,7 @@ const validateUserInput = (req, res, next) => {
 
         if (errorsArray.length > 0) {
             res.status(400).send({ errors: errorsArray })
-            // throw new Error(`FORM FIELDS ERROR: ${JSON.stringify(errorsArray)}`);
         } else {
-
-            console.log('after: ', formFields)
             req.validatedInput = { ...formFields };
             next();
         }

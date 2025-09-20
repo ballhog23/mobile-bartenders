@@ -23,16 +23,16 @@ const stripeCheckout = async (req) => {
             line_items: lineItems,
             customer_email: email,
             mode: 'payment',
-            success_url: "http://localhost:3000/success",
-            cancel_url: "http://localhost:3000/cancel"
-        })
+            success_url: "https://calebpirkle.com/success",
+            cancel_url: "https://calebpirkle.com/cancel"
+        });
 
         if (!session) throw new Error('ERROR CREATING STRIPE CHECKOUT SESSION');
 
         return session;
 
     } catch (error) {
-        throw new Error(`There was an ERROR with stripeCheckout function.\n ERROR_NAME: ${error.name} \n ERROR_MESSAGE: ${error.message}`)
+        throw new Error(`error creating session`)
     }
 }
 
