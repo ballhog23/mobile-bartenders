@@ -3,9 +3,9 @@ const htmlElement = document.documentElement;
 const hamburgerButton = htmlElement.querySelector('.hamburger');
 const navOverlayElement = htmlElement.querySelector('.nav-overlay');
 
-window.addEventListener('resize', closeOverlayNavWithResize)
+window.addEventListener('resize', closeOverlayNavWithResize);
 document.addEventListener('keydown', closeOverlayNavWithEscape);
-hamburgerButton.addEventListener('click', navOverlayFunctionality)
+hamburgerButton.addEventListener('click', navOverlayFunctionality);
 
 // controls active state on navigation bar/overlay nav
 const navLinksCollection = htmlElement.getElementsByClassName('nav-link');
@@ -14,8 +14,9 @@ const currentPath = window.location.pathname;
 
 navLinksArray.forEach(link => {
     const linkPath = link.pathname;
-    if (currentPath === linkPath) link.classList.add('current-page');
-})
+    if (currentPath === linkPath)
+        link.classList.add('current-page');
+});
 
 function navOverlayFunctionality() {
     isNavOverlayHidden() ? openOverlayNav() : closeOverlayNav();
@@ -33,11 +34,13 @@ function closeOverlayNav() {
 
 function closeOverlayNavWithEscape(event) {
     const currentKey = event.key;
-    if (isNavOverlayHidden() === false && currentKey === 'Escape') closeOverlayNav();
+    if (isNavOverlayHidden() === false && currentKey === 'Escape')
+        closeOverlayNav();
 }
 
 function closeOverlayNavWithResize(event) {
-    if (isNavOverlayHidden() === false && window.innerWidth > 768) closeOverlayNav();
+    if (isNavOverlayHidden() === false && window.innerWidth > 768)
+        closeOverlayNav();
 }
 
 function openOverlayNav() {

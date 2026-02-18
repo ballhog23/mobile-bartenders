@@ -1,5 +1,5 @@
 const contactForm = document.getElementById('contact-form');
-const formFields = contactForm.querySelectorAll('label+[name]')
+const formFields = contactForm.querySelectorAll('label+[name]');
 
 contactForm.addEventListener('submit', submitHandler);
 contactForm.addEventListener('blur', validateUserInput, true);
@@ -8,7 +8,7 @@ function validateUserInput(event) {
     const input = event.target;
     const id = input.id;
     const validityObject = input.validity;
-    const button = contactForm.querySelector('button')
+    const button = contactForm.querySelector('button');
     const formFieldsDefintion = {
         name: {
             name: 'name',
@@ -33,10 +33,10 @@ function validateUserInput(event) {
         input.checkValidity();
 
         if (validityObject.tooShort || validityObject.tooLong || validityObject.patternMismatch || validityObject.valueMissing) {
-            input.setCustomValidity(errorMessage)
+            input.setCustomValidity(errorMessage);
         } else {
-            input.style.removeProperty('border-color')
-            input.setCustomValidity('')
+            input.style.removeProperty('border-color');
+            input.setCustomValidity('');
         }
     }
 }
@@ -71,24 +71,24 @@ async function submitHandler(event) {
                 formErrorsElement.insertAdjacentElement('afterbegin', element);
 
                 if (errorField) {
-                    errorField.style.borderColor = '#9d061a'
+                    errorField.style.borderColor = '#9d061a';
                 }
             }
         } else {
             formErrorsElement.style.display = "none";
             contactForm.style.display = "none";
             successMessageElement.style.display = "block";
-            successMessageElement.firstElementChild.insertAdjacentText('beforeend', `, ${json.message}!`)
+            successMessageElement.firstElementChild.insertAdjacentText('beforeend', `, ${json.message}!`);
         }
 
     } catch (error) {
-        console.error(error.name, error.message)
+        console.error(error.name, error.message);
     }
 }
 
 async function sendData(object) {
-    const url = 'https://calebpirkle.com/contact/form-submit';
-    // const url = 'http://localhost:3000/contact/form-submit';
+    // const url = 'https://calebpirkle.com/contact/form-submit';
+    const url = 'http://localhost:3000/contact/form-submit';
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -98,7 +98,7 @@ async function sendData(object) {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-        throw new Error(`network error`)
+        throw new Error(`network error`);
     }
 
     const json = await response.json();

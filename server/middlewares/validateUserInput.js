@@ -21,28 +21,31 @@ const validateUserInput = (req, res, next) => {
             }
 
             if (key === 'name' || key === 'inquiry') {
-                if (value.length < 1) errorsArray.push(clientErrorMessageObject);
+                if (value.length < 1)
+                    errorsArray.push(clientErrorMessageObject);
             }
 
             if (key === 'email') {
-                if (!validator.isEmail(value)) errorsArray.push(clientErrorMessageObject);
+                if (!validator.isEmail(value))
+                    errorsArray.push(clientErrorMessageObject);
             }
 
             if (key === 'phone') {
-                if (!validator.isMobilePhone(value)) errorsArray.push(clientErrorMessageObject);
+                if (!validator.isMobilePhone(value))
+                    errorsArray.push(clientErrorMessageObject);
             }
         }
 
         if (errorsArray.length > 0) {
-            res.status(400).send({ errors: errorsArray })
+            res.status(400).send({ errors: errorsArray });
         } else {
             req.validatedInput = { ...formFields };
             next();
         }
 
     } catch (error) {
-        console.error(error.name, error.message)
+        next();
     }
-}
+};
 
 export default validateUserInput;

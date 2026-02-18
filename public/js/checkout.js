@@ -1,12 +1,12 @@
 const serviceForm = document.getElementById('service-form');
 const eventDateInput = document.getElementById('eventDate');
 
-// set min attr on datepicker to tomorrow so ppl can choose the past or today
+// set min attr on datepicker to tomorrow so ppl cant choose the past or today
 const today = new Date();
 const tomorrow = new Date(today);
 tomorrow.setDate(today.getDate() + 1);
 const year = tomorrow.getFullYear().toString();
-const month = `${tomorrow.getMonth() + 1}`; // js dates are weird
+const month = `${tomorrow.getMonth() + 1}`; // js dates are 0 indexed
 const monthFormatted = month.padStart(2, 0);
 const day = tomorrow.getDate().toString().padStart(2, 0);
 const dateStringFormatted = `${year}-${monthFormatted}-${day}`;
@@ -26,7 +26,7 @@ async function onFormSubmit(event) {
         window.location.href = res.url;
 
     } catch (error) {
-        console.error(`ERROR_NAME: ${error.name}\n MESSAGE: ${error.message}`)
+        console.error(`ERROR_NAME: ${error.name}\n MESSAGE: ${error.message}`);
     }
 }
 
@@ -42,8 +42,8 @@ function createObject(formFieldsIterator, object) {
 }
 
 async function sendData(object) {
-    // const url = 'http://localhost:3000/checkout/create-stripe-session';
-    const url = 'https://calebpirkle.com/checkout/create-stripe-session';
+    const url = 'http://localhost:3000/checkout/create-stripe-session';
+    // const url = 'https://calebpirkle.com/checkout/create-stripe-session';
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -53,10 +53,10 @@ async function sendData(object) {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-        throw new Error(`error posting to stripe session`)
+        throw new Error(`error establishing stripe session`);
     }
 
-    const data = await response.json()
+    const data = await response.json();
 
     return data;
 }

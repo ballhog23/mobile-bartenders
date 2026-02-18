@@ -17,7 +17,7 @@ const formFieldsDefintion = {
   },
   eventDate: {
     name: 'eventDate',
-    errorMessage: 'Please select a date that is not in the past nor today'
+    errorMessage: 'Please select a date in the future'
   },
   service: {
     name: 'service',

@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import servicesDefinition from "../utils/checkout/servicesDefinition.js";
 
-const stripeCheckout = async (req) => {
+const stripeCheckout = async (req, res, next) => {
     try {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST);
         const { service, eventDate, email } = req;
@@ -27,13 +27,14 @@ const stripeCheckout = async (req) => {
             cancel_url: "https://calebpirkle.com/cancel"
         });
 
-        if (!session) throw new Error('ERROR CREATING STRIPE CHECKOUT SESSION');
+        if (!session)
+            throw new Error('ERROR CREATING STRIPE CHECKOUT SESSION');
 
         return session;
 
     } catch (error) {
-        throw new Error(`error creating session`)
+        throw new Error(`error creating session`);
     }
-}
+};
 
 export default stripeCheckout;
