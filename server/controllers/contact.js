@@ -2,12 +2,13 @@
 import sendEmail from '../services/sendEmail.js';
 
 export default async function handlerContactFormSubmit(req, res, next) {
-    try {
-        const { sanitizedOutput } = req;
-        const { name } = sanitizedOutput;
-        sendEmail();
-        res.status(201).send({ message: name });
-    } catch (error) {
-        console.log(error);
-    }
+    const { sanitizedOutput } = req;
+
+    if (!sanitizedOutput)
+        throw new Error('Sanitized output missing');
+
+    const { name } = sanitizedOutput;
+    await sendEmail();
+
+    return res.status(201).send({ message: name });
 }

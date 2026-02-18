@@ -4,7 +4,7 @@ import express from "express";
 import compression from "compression";
 import checkoutRouter from './routes/checkout-route.js';
 import contactRouter from "./routes/contact-route.js";
-
+import { handlerWebError } from "./middlewares/web-error-handler.js";
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,5 +17,8 @@ app.use(express.static(join(__dirname, '../public')));
 // routes
 app.use('/checkout', checkoutRouter);
 app.use('/contact', contactRouter);
+
+
+app.use(handlerWebError);
 
 export default app;

@@ -1,6 +1,6 @@
 import stripeCheckout from '../services/stripeCheckout.js';
 
-export default async function handlerCreateCheckoutSession(params) {
+export default async function handlerCreateCheckoutSession(req, res, next) {
     try {
         const sanitizedOutput = req.sanitizedOutput;
         const stripeCheckoutSession = await stripeCheckout(sanitizedOutput);

@@ -1,7 +1,7 @@
 // email logic for aws ses
 
-const sendEmail = async () => {
-        console.log('email logic')
-}
+const sendEmail = async (req, res, next) => {
+        console.log('email logic');
+};
 
 export default sendEmail;
