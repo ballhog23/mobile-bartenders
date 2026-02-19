@@ -1,2 +1,113 @@
-var s=document.documentElement,c=s.querySelector(".hamburger"),l=s.querySelector(".nav-overlay");window.addEventListener("resize",b);document.addEventListener("keydown",g);c.addEventListener("click",L);var p=s.getElementsByClassName("nav-link"),E=Array.from(p),y=window.location.pathname;E.forEach(e=>{let t=new URL(e.href).pathname;y===t&&e.classList.add("current-page")});function L(){d()?S():m()}function d(){return l.classList.contains("hidden")}function m(){s.classList.remove("overlay-nav-open"),c.classList.remove("open"),l.classList.add("hidden")}function g(e){d()===!1&&e.key==="Escape"&&m()}function b(){d()===!1&&window.innerWidth>768&&m()}function S(){s.classList.add("overlay-nav-open"),c.classList.add("open"),l.classList.remove("hidden")}function T(){let e=document.querySelector(".scroll-to-top"),t=document.querySelector(".hero"),n=document.querySelector(".navbar");if(!e||!t||!n)return;let r=n.offsetHeight;e.addEventListener("click",i=>{i.preventDefault(),scrollTo({top:0,behavior:"smooth"})});let o={root:null,rootMargin:`-${r}px`,threshold:0},h=i=>{i.forEach(f=>{f.isIntersecting?e.classList.add("hidden"):e.classList.remove("hidden")})};new IntersectionObserver(h,o).observe(t)}T();var u=document.getElementById("service-form"),w=document.getElementById("eventDate"),v=new Date,a=new Date(v);a.setDate(v.getDate()+1);var M=a.getFullYear().toString(),H=`${a.getMonth()+1}`,I=H.padStart(2,"0"),O=a.getDate().toString().padStart(2,"0"),k=`${M}-${I}-${O}`;w.setAttribute("min",k);u.addEventListener("submit",R);async function R(e){e.preventDefault();let n=u.querySelectorAll("input, select").values(),r=D(n,{});try{let o=await F(r);window.location.href=o.url}catch(o){o instanceof Error&&console.error(`ERROR_NAME: ${o.name}
- MESSAGE: ${o.message}`)}}function D(e,t){for(let n of e)t[n.name]=n.value.trim();return t}async function F(e){let t="http://localhost:3000/checkout/create-stripe-session",n={method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(e)},r=await fetch(t,n);if(!r.ok)throw new Error("error establishing stripe session");return r.json()}
+// public-ts/navigation.ts
+var htmlElement = document.documentElement;
+var hamburgerButton = htmlElement.querySelector(".hamburger");
+var navOverlayElement = htmlElement.querySelector(".nav-overlay");
+window.addEventListener("resize", closeOverlayNavWithResize);
+document.addEventListener("keydown", closeOverlayNavWithEscape);
+hamburgerButton.addEventListener("click", navOverlayFunctionality);
+var navLinksCollection = htmlElement.getElementsByClassName("nav-link");
+var navLinksArray = Array.from(navLinksCollection);
+var currentPath = window.location.pathname;
+navLinksArray.forEach((link) => {
+  const linkPath = new URL(link.href).pathname;
+  if (currentPath === linkPath)
+    link.classList.add("current-page");
+});
+function navOverlayFunctionality() {
+  isNavOverlayHidden() ? openOverlayNav() : closeOverlayNav();
+}
+function isNavOverlayHidden() {
+  return navOverlayElement.classList.contains("hidden");
+}
+function closeOverlayNav() {
+  htmlElement.classList.remove("overlay-nav-open");
+  hamburgerButton.classList.remove("open");
+  navOverlayElement.classList.add("hidden");
+}
+function closeOverlayNavWithEscape(event) {
+  if (isNavOverlayHidden() === false && event.key === "Escape")
+    closeOverlayNav();
+}
+function closeOverlayNavWithResize() {
+  if (isNavOverlayHidden() === false && window.innerWidth > 768)
+    closeOverlayNav();
+}
+function openOverlayNav() {
+  htmlElement.classList.add("overlay-nav-open");
+  hamburgerButton.classList.add("open");
+  navOverlayElement.classList.remove("hidden");
+}
+
+// public-ts/scroll-to-top.ts
+function initScrollToTop() {
+  const scrollToTopButton = document.querySelector(".scroll-to-top");
+  const heroElement = document.querySelector(".hero");
+  const navbar = document.querySelector(".navbar");
+  if (!scrollToTopButton || !heroElement || !navbar) return;
+  const navbarHeight = navbar.offsetHeight;
+  scrollToTopButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    scrollTo({ top: 0, behavior: "smooth" });
+  });
+  const options = {
+    root: null,
+    rootMargin: `-${navbarHeight}px`,
+    threshold: 0
+  };
+  const buttonVisibility = (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) scrollToTopButton.classList.remove("hidden");
+      else scrollToTopButton.classList.add("hidden");
+    });
+  };
+  const observer = new IntersectionObserver(buttonVisibility, options);
+  observer.observe(heroElement);
+}
+initScrollToTop();
+
+// public-ts/checkout.ts
+var serviceForm = document.getElementById("service-form");
+var eventDateInput = document.getElementById("eventDate");
+var today = /* @__PURE__ */ new Date();
+var tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
+var year = tomorrow.getFullYear().toString();
+var month = `${tomorrow.getMonth() + 1}`;
+var monthFormatted = month.padStart(2, "0");
+var day = tomorrow.getDate().toString().padStart(2, "0");
+var dateStringFormatted = `${year}-${monthFormatted}-${day}`;
+eventDateInput.setAttribute("min", dateStringFormatted);
+serviceForm.addEventListener("submit", onFormSubmit);
+async function onFormSubmit(event) {
+  event.preventDefault();
+  const formFields = serviceForm.querySelectorAll("input, select");
+  const formFieldsValues = formFields.values();
+  const formFieldsData = createObject(formFieldsValues, {});
+  try {
+    const res = await sendData(formFieldsData);
+    window.location.href = res.url;
+  } catch (error) {
+    if (error instanceof Error)
+      console.error(`ERROR_NAME: ${error.name}
+ MESSAGE: ${error.message}`);
+  }
+}
+function createObject(formFieldsIterator, object) {
+  for (const element of formFieldsIterator) {
+    object[element.name] = element.value.trim();
+  }
+  return object;
+}
+async function sendData(object) {
+  const url = "http://localhost:3000/checkout/create-stripe-session";
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(object)
+  };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error("error establishing stripe session");
+  }
+  return response.json();
+}

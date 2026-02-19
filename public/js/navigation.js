@@ -1,1 +1,39 @@
-var e=document.documentElement,a=e.querySelector(".hamburger"),t=e.querySelector(".nav-overlay");window.addEventListener("resize",m);document.addEventListener("keydown",v);a.addEventListener("click",d);var c=e.getElementsByClassName("nav-link"),l=Array.from(c),r=window.location.pathname;l.forEach(n=>{let i=new URL(n.href).pathname;r===i&&n.classList.add("current-page")});function d(){o()?u():s()}function o(){return t.classList.contains("hidden")}function s(){e.classList.remove("overlay-nav-open"),a.classList.remove("open"),t.classList.add("hidden")}function v(n){o()===!1&&n.key==="Escape"&&s()}function m(){o()===!1&&window.innerWidth>768&&s()}function u(){e.classList.add("overlay-nav-open"),a.classList.add("open"),t.classList.remove("hidden")}
+// public-ts/navigation.ts
+var htmlElement = document.documentElement;
+var hamburgerButton = htmlElement.querySelector(".hamburger");
+var navOverlayElement = htmlElement.querySelector(".nav-overlay");
+window.addEventListener("resize", closeOverlayNavWithResize);
+document.addEventListener("keydown", closeOverlayNavWithEscape);
+hamburgerButton.addEventListener("click", navOverlayFunctionality);
+var navLinksCollection = htmlElement.getElementsByClassName("nav-link");
+var navLinksArray = Array.from(navLinksCollection);
+var currentPath = window.location.pathname;
+navLinksArray.forEach((link) => {
+  const linkPath = new URL(link.href).pathname;
+  if (currentPath === linkPath)
+    link.classList.add("current-page");
+});
+function navOverlayFunctionality() {
+  isNavOverlayHidden() ? openOverlayNav() : closeOverlayNav();
+}
+function isNavOverlayHidden() {
+  return navOverlayElement.classList.contains("hidden");
+}
+function closeOverlayNav() {
+  htmlElement.classList.remove("overlay-nav-open");
+  hamburgerButton.classList.remove("open");
+  navOverlayElement.classList.add("hidden");
+}
+function closeOverlayNavWithEscape(event) {
+  if (isNavOverlayHidden() === false && event.key === "Escape")
+    closeOverlayNav();
+}
+function closeOverlayNavWithResize() {
+  if (isNavOverlayHidden() === false && window.innerWidth > 768)
+    closeOverlayNav();
+}
+function openOverlayNav() {
+  htmlElement.classList.add("overlay-nav-open");
+  hamburgerButton.classList.add("open");
+  navOverlayElement.classList.remove("hidden");
+}
