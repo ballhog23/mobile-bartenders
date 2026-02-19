@@ -108,11 +108,11 @@ async function submitHandler(event) {
         currentErrors.forEach((element) => element.remove());
       }
       formFields.forEach((element) => element.classList.remove("form-error"));
-      for (const error of Object.values(errors)) {
+      for (const error of errors) {
         const { name, errorMessage } = error;
         const element = document.createElement("p");
         element.id = `${name}-error`;
-        element.innerText = errorMessage;
+        element.textContent = errorMessage;
         formErrorsElement.insertAdjacentElement("afterbegin", element);
         if (name === "unexpected-key-values") {
           formFields.forEach((field) => field.classList.add("form-error"));

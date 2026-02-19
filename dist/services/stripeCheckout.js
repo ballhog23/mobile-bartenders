@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import servicesDefinition from '../utils/checkout/servicesDefinition.js';
+import servicesDefinition from '../utils/servicesDefinition.js';
 const stripeCheckout = async (sanitizedOutput) => {
     try {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST);

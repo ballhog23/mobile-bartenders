@@ -1,11 +1,4 @@
-interface FieldDefinition {
-    name: string;
-    errorMessage: string;
-    minLength: number;
-    maxLength: number;
-}
-
-const contactFormFieldsDefinition: Record<string, FieldDefinition> = {
+const contactFormFieldsDefinition = {
     name: {
         name: 'name',
         errorMessage: 'Please enter your name. Must be between 2 and 50 characters.',
@@ -31,5 +24,4 @@ const contactFormFieldsDefinition: Record<string, FieldDefinition> = {
         maxLength: 500,
     },
 };
-
 export default contactFormFieldsDefinition;

@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import servicesDefinition from '../utils/checkout/servicesDefinition.js';
+import servicesDefinition from '../utils/servicesDefinition.js';
 
 const stripeCheckout = async (sanitizedOutput: Record<string, string>): Promise<Stripe.Checkout.Session> => {
     try {

@@ -1,10 +1,11 @@
 import validator from 'validator';
-import contactFormFieldsDefinition from '../utils/validation/contact-form-definition.js';
+import contactFormFieldsDefinition from '../utils/contact-form-definition.js';
 const validateContactForm = (req, res, next) => {
     console.log('validating contact form data...');
     const { body } = req;
     const validated = {};
     const errorsArray = [];
+    // catch unexpected keys incoming first, return quick
     const unexpectedKeys = Object.keys(body).filter(k => !contactFormFieldsDefinition[k]);
     if (unexpectedKeys.length > 0) {
         errorsArray.push({
@@ -14,6 +15,7 @@ const validateContactForm = (req, res, next) => {
         res.status(400).send({ errors: errorsArray });
         return;
     }
+    // validate properly shaped incoming data
     for (const [key, config] of Object.entries(contactFormFieldsDefinition)) {
         const errorObject = {
             name: config.name,

@@ -1,20 +1,20 @@
 import './navigation';
 import './scroll-to-top';
 
-interface FieldDefinition {
+type FieldDefinition = {
     name: string;
     errorMessage: string;
-}
+};
 
-interface FormError {
+type FormErrorObject = {
     name: string;
     errorMessage: string;
-}
+};
 
-interface ContactResponse {
-    errors?: FormError[];
+type ContactResponse = {
+    errors?: FormErrorObject[];
     message?: string;
-}
+};
 
 const contactForm = document.getElementById('contact-form') as HTMLFormElement;
 const formFields = contactForm.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('label+[name]');
@@ -34,6 +34,7 @@ function validateUserInput(event: Event): void {
         inquiry: { name: 'inquiry', errorMessage: 'Please enter a message' },
     };
 
+    // client side validation
     if (input !== button) {
         const errorMessage = formFieldsDefinition[id].errorMessage;
         input.checkValidity();
@@ -71,11 +72,11 @@ async function submitHandler(event: SubmitEvent): Promise<void> {
             // to see newly passing fields vs old failing fields
             formFields.forEach(element => element.classList.remove('form-error'));
 
-            for (const error of Object.values(errors)) {
+            for (const error of errors) {
                 const { name, errorMessage } = error;
                 const element = document.createElement('p');
                 element.id = `${name}-error`;
-                element.innerText = errorMessage;
+                element.textContent = errorMessage;
                 formErrorsElement.insertAdjacentElement('afterbegin', element);
 
                 if (name === 'unexpected-key-values') {

@@ -1,9 +1,4 @@
-interface ServiceDefinition {
-    price: number;
-    name: string;
-}
-
-const servicesDefinition: Record<string, ServiceDefinition> = {
+const servicesDefinition = {
     basic: {
         price: 30000,
         name: 'Like Wine',
@@ -17,5 +12,4 @@ const servicesDefinition: Record<string, ServiceDefinition> = {
         name: 'Best Damn Wine',
     },
 };
-
 export default servicesDefinition;

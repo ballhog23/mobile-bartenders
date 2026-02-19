@@ -1,13 +1,20 @@
 import type { Request, Response, NextFunction } from 'express';
 import validator from 'validator';
-import contactFormFieldsDefinition from '../utils/validation/contact-form-definition.js';
+import contactFormFieldsDefinition,
+{
+    type ContactFormFieldDefinition
+
+} from '../utils/contact-form-definition.js';
+
+type FormErrorObject = Pick<ContactFormFieldDefinition, "name" | "errorMessage">;
 
 const validateContactForm = (req: Request, res: Response, next: NextFunction): void => {
     console.log('validating contact form data...');
     const { body } = req;
     const validated: Record<string, string> = {};
-    const errorsArray: Array<{ name: string; errorMessage: string }> = [];
+    const errorsArray: Array<FormErrorObject> = [];
 
+    // catch unexpected keys incoming first, return quick
     const unexpectedKeys = Object.keys(body).filter(k => !contactFormFieldsDefinition[k]);
     if (unexpectedKeys.length > 0) {
         errorsArray.push({
@@ -18,8 +25,9 @@ const validateContactForm = (req: Request, res: Response, next: NextFunction): v
         return;
     }
 
+    // validate properly shaped incoming data
     for (const [key, config] of Object.entries(contactFormFieldsDefinition)) {
-        const errorObject = {
+        const errorObject: FormErrorObject = {
             name: config.name,
             errorMessage: config.errorMessage,
         };
