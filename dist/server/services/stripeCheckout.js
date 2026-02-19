@@ -1,9 +1,9 @@
 import Stripe from 'stripe';
-import servicesDefinition from '../utils/servicesDefinition.js';
-const stripeCheckout = async (sanitizedOutput) => {
+import servicesDefinition from '../../shared/servicesDefinition.js';
+const stripeCheckout = async (validatedInput) => {
     try {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST);
-        const { service, eventDate, email } = sanitizedOutput;
+        const { service, eventDate, email } = validatedInput;
         const { price, name } = servicesDefinition[service];
         const formattedEventDate = new Date(eventDate).toDateString();
         const lineItems = [{

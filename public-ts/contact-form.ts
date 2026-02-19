@@ -1,15 +1,10 @@
 import './navigation';
 import './scroll-to-top';
-
-type FieldDefinition = {
-    name: string;
-    errorMessage: string;
-};
-
-type FormErrorObject = {
-    name: string;
-    errorMessage: string;
-};
+import {
+    contactFormFieldsDefinition,
+    type ContactFormFieldDefinition,
+    FormErrorObject
+} from "../shared/contact-form-definition.js";
 
 type ContactResponse = {
     errors?: FormErrorObject[];
@@ -27,24 +22,36 @@ function validateUserInput(event: Event): void {
     const id = input.id;
     const validityObject = input.validity;
     const button = contactForm.querySelector('button');
-    const formFieldsDefinition: Record<string, FieldDefinition> = {
-        name: { name: 'name', errorMessage: 'Please enter your legal name' },
-        email: { name: 'email', errorMessage: 'Invalid email format. Use this format: example@domain.com' },
-        phone: { name: 'phone', errorMessage: 'Invalid phone format. Only Digits. No area code. Use this format: 1231231234' },
-        inquiry: { name: 'inquiry', errorMessage: 'Please enter a message' },
-    };
+    const formFieldsDefinition = contactFormFieldsDefinition;
 
     // client side validation
     if (input !== button) {
-        const errorMessage = formFieldsDefinition[id].errorMessage;
-        input.checkValidity();
+        const fieldDefinition = formFieldsDefinition[id];
+        if (!fieldDefinition)
+            return;
 
-        if (validityObject.tooShort || validityObject.tooLong || validityObject.patternMismatch || validityObject.valueMissing) {
-            input.setCustomValidity(errorMessage);
+        // Run browser validity checks
+        input.checkValidity();
+        const validityCheck = validityObject.tooShort ||
+            validityObject.tooLong ||
+            validityObject.patternMismatch ||
+            validityObject.valueMissing;
+
+        const value = input.value.trim();
+        const minMaxCheck = value.length < fieldDefinition.minLength || value.length > fieldDefinition.maxLength;
+
+        if (minMaxCheck || validityCheck) {
+            input.classList.add('form-error');
+            input.setCustomValidity(fieldDefinition.errorMessage);
+
         } else {
             input.classList.remove('form-error');
             input.setCustomValidity('');
         }
+
+        // if user tries to navigate away from form field without adding input
+        // it will focus the element until they pass the browser side check, its kind of toxic to be honest
+        input.reportValidity();
     }
 }
 

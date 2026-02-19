@@ -65,6 +65,38 @@ function initScrollToTop() {
 }
 initScrollToTop();
 
+// shared/contact-form-definition.ts
+var contactFormFieldsDefinition = {
+  name: {
+    name: "name",
+    errorMessage: "Please enter your name, must be between 2 and 50 characters",
+    minLength: 2,
+    maxLength: 50,
+    regex: null
+  },
+  email: {
+    name: "email",
+    errorMessage: "Invalid email format. Use format: example@domain.com",
+    minLength: 5,
+    maxLength: 50,
+    regex: null
+  },
+  phone: {
+    name: "phone",
+    errorMessage: "Invalid phone format. Use format: 1231231234",
+    minLength: 10,
+    maxLength: 10,
+    regex: /\d{10}/
+  },
+  inquiry: {
+    name: "inquiry",
+    errorMessage: "Please enter a message between 10 and 500 characters long",
+    minLength: 10,
+    maxLength: 500,
+    regex: null
+  }
+};
+
 // public-ts/contact-form.ts
 var contactForm = document.getElementById("contact-form");
 var formFields = contactForm.querySelectorAll("label+[name]");
@@ -75,21 +107,23 @@ function validateUserInput(event) {
   const id = input.id;
   const validityObject = input.validity;
   const button = contactForm.querySelector("button");
-  const formFieldsDefinition = {
-    name: { name: "name", errorMessage: "Please enter your legal name" },
-    email: { name: "email", errorMessage: "Invalid email format. Use this format: example@domain.com" },
-    phone: { name: "phone", errorMessage: "Invalid phone format. Only Digits. No area code. Use this format: 1231231234" },
-    inquiry: { name: "inquiry", errorMessage: "Please enter a message" }
-  };
+  const formFieldsDefinition = contactFormFieldsDefinition;
   if (input !== button) {
-    const errorMessage = formFieldsDefinition[id].errorMessage;
+    const fieldDefinition = formFieldsDefinition[id];
+    if (!fieldDefinition)
+      return;
     input.checkValidity();
-    if (validityObject.tooShort || validityObject.tooLong || validityObject.patternMismatch || validityObject.valueMissing) {
-      input.setCustomValidity(errorMessage);
+    const validityCheck = validityObject.tooShort || validityObject.tooLong || validityObject.patternMismatch || validityObject.valueMissing;
+    const value = input.value.trim();
+    const minMaxCheck = value.length < fieldDefinition.minLength || value.length > fieldDefinition.maxLength;
+    if (minMaxCheck || validityCheck) {
+      input.classList.add("form-error");
+      input.setCustomValidity(fieldDefinition.errorMessage);
     } else {
       input.classList.remove("form-error");
       input.setCustomValidity("");
     }
+    input.reportValidity();
   }
 }
 async function submitHandler(event) {

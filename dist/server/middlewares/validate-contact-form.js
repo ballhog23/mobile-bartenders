@@ -1,16 +1,11 @@
-import { contactFormSchema, type ContactFormSchema } from "../utils/zod.js";
-import type { Request, Response, NextFunction } from 'express';
-
-
-const validateContactForm = (req: Request, res: Response, next: NextFunction): Response | void => {
+import { contactFormSchema } from "../utils/zod.js";
+const validateContactForm = (req, res, next) => {
     const { body } = req;
     const validatedInput = contactFormSchema.safeParse(body);
-
     if (validatedInput.success) {
         req.validatedContactFormInput = validatedInput.data;
         return next();
     }
-
     const errors = validatedInput.error.issues.map(errorObj => {
         const [name] = errorObj.path; // key of object maps to input element on frontend
         const errorMessage = errorObj.message;
@@ -19,8 +14,6 @@ const validateContactForm = (req: Request, res: Response, next: NextFunction): R
             errorMessage
         };
     });
-
     return res.status(400).send({ errors });
 };
-
 export default validateContactForm;
