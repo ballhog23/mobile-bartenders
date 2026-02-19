@@ -1,48 +1,57 @@
-// import { trim, isEmail, isDate, isMobilePhone } from 'validator/lib';
 import validator from 'validator';
-import formFieldsDefiniton from '../utils/validation/formFieldsDefinition.js';
+import contactFormFieldsDefinition from '../utils/validation/contact-form-definition.js';
 
 const validateContactForm = (req, res, next) => {
+    console.log('validating contact form data...');
     const { body } = req;
-    console.log(body);
-    const formFields = { ...body }; // shallow copy
+    const validated = {};
     const errorsArray = [];
 
-    for (const [key, value] of Object.entries(formFields)) {
-        const clientErrorMessageObject = formFieldsDefiniton[key];
+    const unexpectedKeys = Object.keys(body).filter(k => !contactFormFieldsDefinition[k]);
+    if (unexpectedKeys.length > 0) {
+        errorsArray.push({
+            name: 'unexpected-key-values',
+            errorMessage: `Unexpected fields submitted`
+        });
+        return res.status(400).send({ errors: errorsArray });
+    }
 
-        if (formFields.hasOwnProperty(key)) {
-            const trimmedValue = validator.trim(value);
-            formFields[key] = trimmedValue;
+    for (const [key, config] of Object.entries(contactFormFieldsDefinition)) {
+        const errorObject = {
+            name: config.name,
+            errorMessage: config.errorMessage
+        };
+        let value = body[key];
+
+        if (!value || typeof value !== "string" || typeof key !== "string") {
+            errorsArray.push(errorObject);
+            continue;
         }
 
-        if (typeof key !== 'string' && typeof value !== 'string') {
-            throw new TypeError(`${key} : ${value}\n is NOT a string`);
-        }
+        value = validator.trim(value);
 
-        if (key === 'name' || key === 'inquiry') {
-            if (value.length < 1)
-                errorsArray.push(clientErrorMessageObject);
-        }
+        if (value.length < config.minLength || value.length > config.maxLength)
+            errorsArray.push(errorObject);
 
-        if (key === 'email') {
-            if (!validator.isEmail(value))
-                errorsArray.push(clientErrorMessageObject);
-        }
+        if (key === 'email' && !validator.isEmail(value))
+            errorsArray.push(errorObject);
 
-        if (key === 'phone') {
-            if (!validator.isMobilePhone(value))
-                errorsArray.push(clientErrorMessageObject);
-        }
+        if (key === 'phone' && !validator.isMobilePhone(value))
+            errorsArray.push(errorObject);
+
+        validated[key] = value;
     }
 
     if (errorsArray.length > 0) {
-        res.status(400).send({ errors: errorsArray });
-    } else {
-        req.validatedInput = { ...formFields };
+        console.log('did not pass validation, returning 400 to client');
+        console.log(errorsArray);
+        return res.status(400).send({ errors: errorsArray });
+    }
+    else {
+        console.log('passed validation, moving to sanitization middleware');
+        req.validatedInput = validated;
         return next();
     }
-
 };
 
 export default validateContactForm;

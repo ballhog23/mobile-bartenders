@@ -35,7 +35,7 @@ function validateUserInput(event) {
         if (validityObject.tooShort || validityObject.tooLong || validityObject.patternMismatch || validityObject.valueMissing) {
             input.setCustomValidity(errorMessage);
         } else {
-            input.style.removeProperty('border-color');
+            input.classList.remove('form-error');
             input.setCustomValidity('');
         }
     }
@@ -55,23 +55,33 @@ async function submitHandler(event) {
         if (errors) {
             formErrorsElement.style.display = "block";
 
+            // check if previous error messages are present, if so remove them to insert fresh ones
             if (formErrorsElement.hasChildNodes()) {
                 const currentErrors = Array.from(formErrorsElement.childNodes);
                 currentErrors.forEach(element => element.remove());
             }
 
-            formFields.forEach(element => element.style.removeProperty('border-color'));
+            // same idea as above, if error messages are stale then the border color wont update
+            // to see newly passing fields vs old failing fields
+            formFields.forEach(
+                element => element.classList.remove('form-error')
+            );
 
             for (const error of Object.values(errors)) {
                 const { name, errorMessage } = error;
                 const element = document.createElement('p');
-                const errorField = document.getElementById(name); // form field if error is present for field
                 element.id = `${name}-error`;
                 element.innerText = errorMessage;
                 formErrorsElement.insertAdjacentElement('afterbegin', element);
 
-                if (errorField) {
-                    errorField.style.borderColor = '#9d061a';
+                if (name === 'unexpected-key-values') {
+                    formFields.forEach(
+                        field => field.classList.add('form-error')
+                    );
+                } else {
+                    const errorField = document.getElementById(name);
+                    if (errorField)
+                        errorField.classList.add('form-error');
                 }
             }
         } else {
@@ -97,13 +107,7 @@ async function sendData(object) {
 
     const response = await fetch(url, options);
 
-    if (!response.ok) {
-        throw new Error(`network error`);
-    }
-
-    const json = await response.json();
-
-    return json;
+    return await response.json();
 }
 
 function createObject(formFieldsNodeList, object) {
