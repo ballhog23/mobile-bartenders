@@ -1,0 +1,174 @@
+@use '../general' as *;
+
+.hero {
+    height: auto;
+
+    &::before {
+        all: unset;
+    }
+
+    section {
+        width: 100%;
+
+        h1 {
+            color: $red;
+        }
+
+        p {
+            color: $black;
+        }
+    }
+}
+
+.the-services {
+    .service-card {
+        position: relative;
+        // z-index: 1;
+        display: flex;
+        flex-direction: column;
+        padding-block: 6.25rem;
+
+        @media (min-width: $md-breakpoint) {
+            flex-direction: row;
+        }
+
+        &:first-of-type,
+        &:last-of-type {
+            padding-block: 0;
+        }
+
+        &.reverse {
+            @media only screen and (min-width: $md-breakpoint) {
+                flex-direction: row-reverse;
+
+                .right {
+                     border-radius: 1.875rem 0 0 1.875rem;
+                }
+            }
+        }
+
+        .left {
+            position: relative;
+            min-height: 18.75rem;
+            padding-inline: .625rem;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background-color: rgba($color: $black, $alpha: 0.5);
+                z-index: 1;
+            }
+
+            h2 {
+                z-index: 3;
+                color: $white;
+            }
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 0;
+            }
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            align-items: start;
+            padding: 1.25rem;
+            border-radius: 0 0 1.875rem 1.875rem;
+            box-shadow: .938rem .938rem 1.875rem $alt-gray;
+                background-color: $white;
+
+            @media (min-width: $sm-breakpoint) {
+                padding: 2.5rem;
+            }
+
+            @media (min-width: $md-breakpoint) {
+                border-radius: 0 1.875rem 1.875rem 0
+            }
+
+            .intro {
+                display: flex;
+                flex-direction: column;
+                gap: .625rem;
+                margin: 0 0 .625rem 0;
+
+                @media (min-width: $sm-breakpoint) {
+                    align-items: center;
+                    flex-direction: row;
+                    margin: 0 0 2rem 0;
+                }
+
+                h3 {
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    color: $red;
+                }
+            }
+
+            img {
+                width: 2.5rem;
+
+                @media (min-width: $sm-breakpoint) {
+                    width: 3.125rem;
+                }
+            }
+
+            ul {
+                list-style-type: main-services;
+                padding-inline-start: 2ch;
+                text-transform: capitalize;
+
+                li {
+                    padding-inline-start: .625rem;
+
+                    ul {
+                        list-style-type: bar-amenities;
+                    }
+                }
+            }
+
+            a.btn {
+                margin-top: 1.25rem;
+               
+                @media (min-width: $sm-breakpoint) {
+                    align-self: flex-end;
+                }
+            }
+        }
+
+        &.service-card:not(:nth-of-type(1)) {
+            ul:not(li > ul) {
+                list-style-type: main-services-premium;
+            }
+        }
+    }
+}
+
+@counter-style main-services {
+    system: cyclic;
+    symbols: "\1F553" "\1F574" "\1F378" "\1F528";
+    suffix: "";
+}
+
+@counter-style main-services-premium {
+    system: cyclic;
+    symbols: "\1F553" "\1F574" "\1F378" "\1F33F" "\1F528";
+    suffix: "";
+}
+
+@counter-style bar-amenities {
+    system: cyclic;
+    symbols: "\1F9CA" "\1F37A" "\1F927" "\1F964" "\1F9F0";
+    suffix: "";
+}
